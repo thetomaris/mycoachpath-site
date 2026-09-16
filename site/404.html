@@ -1,0 +1,229 @@
+<!doctype html>
+<html prefix="og: http://ogp.me/ns#">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <title id="pageTitle"></title>
+    <link rel="icon" type="img/png" href="/assets/onecdn.io/favicon/favicon_16x16.png" sizes="16x16">
+    <link rel="icon" type="img/png" href="/assets/onecdn.io/favicon/favicon_32x32.png" sizes="32x32">
+    <link rel="icon" type="img/png" href="/assets/onecdn.io/favicon/favicon_144x144.png" sizes="144x144">
+    <link rel="sitemap" id="sitemapLink" type="application/xml" title="Sitemap" href="">
+    <style>
+        .con-kit-site-not-found {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            background-color: white;
+            color: #222225;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        .con-kit-site-not-found__wrapper {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            font-size: 16px;
+        }
+
+        @media (max-width: 500px) {
+            .con-kit-site-not-found__wrapper {
+                font-size: 14px;
+            }
+        }
+
+        .con-kit-site-not-found__wrapper__spacer{
+            height: 20%;
+            min-height: 72px;
+            max-height: 180px;
+        }
+
+        .con-kit-site-not-found__wrapper .domain {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            color: #141414;
+            font-weight: 400;
+            font-size: 12px;
+            text-transform: uppercase;
+            line-height: 1.4;
+            margin-top: 0;
+            opacity: 0.7;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            padding: 16px;
+        }
+        .con-kit-site-not-found__wrapper .domain:hover{
+            opacity: 0.7;
+        }
+
+        .con-kit-site-not-found__wrapper__top-bar {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            max-width: 440px;
+            box-sizing: border-box;
+            padding: 24px;
+        }
+
+        .con-kit-site-not-found__wrapper__top-bar span {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            color: #141414;
+            font-size: 5em;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-top: 8px;
+            margin-bottom: 0.2em;
+            opacity: 0.1;
+        }
+
+        .con-kit-site-not-found__wrapper__top-bar h1 {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            color: #141414;
+            font-size: 1.7em;
+            font-weight: 600;
+            line-height: 1.1;
+            margin-top: 8px;
+            margin-bottom: 16px;
+        }
+
+        .con-kit-site-not-found__wrapper__top-bar p {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            color: #141414;
+            font-weight: 400;
+            font-size: 1em;
+            line-height: 1.5;
+            margin-top: 0;
+            margin-bottom: 56px;
+            opacity: 0.7;
+        }
+
+        .con-kit-site-not-found__wrapper__top-bar img {
+            border: none;
+        }
+
+        .con-kit-site-not-found__wrapper__top-bar a.con-kit-button {
+            background: rgba(0,0,0,0);
+            font-weight: 400;
+            color: #141414;
+            text-decoration: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            padding: 0.9em 2em;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease;
+            border: 1px solid rgba(156,156,156, 0.2);
+            opacity: 0.7;
+            font-size: 0.95em;
+        }
+
+        .con-kit-site-not-found__wrapper__top-bar a.con-kit-button:hover {
+            background: rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body style="margin: 0;">
+        <div class="con-kit-site-not-found">
+        <div class="con-kit-site-not-found__wrapper">
+            <div class="con-kit-site-not-found__wrapper__spacer"></div>
+            <div class="con-kit-site-not-found__wrapper__top-bar">
+                <span style="text-align: center;">404</span>
+                <h1 id="mainHeading" style="text-align: center;"></h1>
+                <p id="descriptionText" style="text-align: center;"></p>
+                <a href="/" id="backButton" class="con-kit-button"></a>
+            </div>
+            <a class="domain" href="/"></a>
+        </div>
+    </div>
+    <script>
+        const translations = {
+            'en': {
+                'title': 'Page not found',
+                'description': 'We can\'t find the page you\'re looking for. It might have been moved, deleted, or unpublished',
+                'button': 'Back to main page'
+            },
+            'de': {
+                'title': 'Seite nicht gefunden',
+                'description': 'Wir können die Seite, die Sie suchen, nicht finden. Sie wurde möglicherweise verschoben, gelöscht oder nicht veröffentlicht',
+                'button': 'Zurück zur Hauptseite'
+            },
+            'es': {
+                'title': 'Página no encontrada',
+                'description': 'No podemos encontrar la página que estás buscando. Puede que haya sido movida, eliminada o no publicada',
+                'button': 'Volver a la página principal'
+            },
+            'fr': {
+                'title': 'Page non trouvée',
+                'description': 'Nous ne trouvons pas la page que vous recherchez. Elle a peut-être été déplacée, supprimée ou non publiée',
+                'button': 'Retour à la page principale'
+            },
+            'pl': {
+                'title': 'Strona nie znaleziona',
+                'description': 'Nie możemy znaleźć strony, której szukasz. Mogła zostać przeniesiona, usunięta lub nieopublikowana',
+                'button': 'Powrót do strony głównej'
+            },
+            'uk': {
+                'title': 'Сторінка не знайдена',
+                'description': 'Ми не можемо знайти сторінку, яку ви шукаєте. Можливо, її було переміщено, видалено або не опубліковано',
+                'button': 'Повернутися на головну сторінку'
+            }
+        };
+
+        function setDomainSpecificContent() {
+            const domain = window.location.hostname;
+            const sitemapLink = document.getElementById('sitemapLink');
+            if (sitemapLink) {
+                sitemapLink.href = 'https://' + domain + '/sitemap.xml';
+            }
+
+            const domainElement = document.querySelector('a.domain');
+            if (domainElement) {
+                domainElement.textContent = domain;
+            }
+        }
+
+        function setLocalizedContent() {
+            const userLang = navigator.language || navigator.userLanguage;
+            const langCode = userLang.split('-')[0];
+
+            const selectedTranslations = translations[langCode] || translations['en'];
+
+            const pageTitleElement = document.getElementById('pageTitle');
+            if (pageTitleElement) {
+                pageTitleElement.textContent = selectedTranslations.title;
+            }
+
+            const mainHeadingElement = document.getElementById('mainHeading');
+            if (mainHeadingElement) {
+                mainHeadingElement.textContent = selectedTranslations.title;
+            }
+
+            const descriptionTextElement = document.getElementById('descriptionText');
+            if (descriptionTextElement) {
+                descriptionTextElement.textContent = selectedTranslations.description;
+            }
+
+            const backButtonElement = document.getElementById('backButton');
+            if (backButtonElement) {
+                backButtonElement.textContent = selectedTranslations.button;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+			setLocalizedContent()
+			setDomainSpecificContent()
+		});
+    </script>
+</body>
+</html>

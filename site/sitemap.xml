@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://mycoachpath.com/imprint</loc>
+    <lastmod>2026-05-25T00:22:00.929Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mycoachpath.com/privacy-policy</loc>
+    <lastmod>2026-05-25T00:22:09.465Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mycoachpath.com/thank-you</loc>
+    <lastmod>2026-06-04T02:33:15.143Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mycoachpath.com/disclaimer</loc>
+    <lastmod>2026-05-25T00:22:13.762Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mycoachpath.com/cc</loc>
+    <lastmod>2026-05-25T00:17:13.604Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://mycoachpath.com/</loc>
+    <lastmod>2026-06-25T13:47:00.170Z</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://mycoachpath.com/possibility-sheet</loc>
+    <lastmod>2026-07-24T12:37:06.544Z</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+</urlset>

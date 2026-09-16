@@ -1,0 +1,84 @@
+@font-face {
+  font-display: swap;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 200;
+  
+  src: local(''),
+    url('/assets/onecdn.io/font-storage/manrope/manrope-200.woff2') format('woff2'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-200.woff') format('woff'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-200.ttf') format('truetype'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-200.svg') format('svg')
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 300;
+  
+  src: local(''),
+    url('/assets/onecdn.io/font-storage/manrope/manrope-300.woff2') format('woff2'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-300.woff') format('woff'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-300.ttf') format('truetype'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-300.svg') format('svg')
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 400;
+  
+  src: local(''),
+    url('/assets/onecdn.io/font-storage/manrope/manrope-regular.woff2') format('woff2'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-regular.woff') format('woff'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-regular.ttf') format('truetype'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-regular.svg') format('svg')
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 500;
+  
+  src: local(''),
+    url('/assets/onecdn.io/font-storage/manrope/manrope-500.woff2') format('woff2'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-500.woff') format('woff'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-500.ttf') format('truetype'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-500.svg') format('svg')
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 600;
+  
+  src: local(''),
+    url('/assets/onecdn.io/font-storage/manrope/manrope-600.woff2') format('woff2'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-600.woff') format('woff'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-600.ttf') format('truetype'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-600.svg') format('svg')
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 700;
+  
+  src: local(''),
+    url('/assets/onecdn.io/font-storage/manrope/manrope-700.woff2') format('woff2'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-700.woff') format('woff'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-700.ttf') format('truetype'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-700.svg') format('svg')
+}
+@font-face {
+  font-display: swap;
+  font-family: 'Manrope';
+  font-style: normal;
+  font-weight: 800;
+  
+  src: local(''),
+    url('/assets/onecdn.io/font-storage/manrope/manrope-800.woff2') format('woff2'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-800.woff') format('woff'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-800.ttf') format('truetype'),
+       url('/assets/onecdn.io/font-storage/manrope/manrope-800.svg') format('svg')
+}
