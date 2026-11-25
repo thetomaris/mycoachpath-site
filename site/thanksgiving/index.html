@@ -139,16 +139,16 @@ form{display:grid;gap:14px;margin-top:20px}
 .bknote{font-size:13px;color:var(--mut);text-align:center}
 .formrow{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center}
 .about{position:fixed;right:20px;bottom:20px;z-index:40;display:flex;flex-direction:column;align-items:flex-end}
-.aboutpill{min-height:40px;padding:0 16px;border-radius:40px;border:0;background:#000;color:#fff;font:500 13px Inter,sans-serif;cursor:pointer;box-shadow:0 8px 24px -10px rgba(0,0,0,.5);transition:opacity .3s,transform .3s}
+.aboutpill{min-height:32px;padding:0 13px;border-radius:40px;border:0;background:#000;color:#fff;font:500 12px Inter,sans-serif;cursor:pointer;box-shadow:0 8px 24px -10px rgba(0,0,0,.5);transition:opacity .3s,transform .3s}
 .about.open .aboutpill,.about:not(.ready) .aboutpill{opacity:0;transform:translateY(8px);pointer-events:none}
-.aboutcard{position:absolute;right:0;bottom:0;width:min(330px,calc(100vw - 24px));background:#000;color:#fff;border-radius:16px;padding:20px 24px 22px;box-shadow:0 24px 60px -18px rgba(0,0,0,.55);opacity:0;transform:translateY(20px);pointer-events:none;transition:opacity .5s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
+.aboutcard{position:absolute;right:0;bottom:0;width:min(270px,calc(100vw - 24px));background:#000;color:#fff;border-radius:12px;padding:14px 16px 15px;box-shadow:0 12px 32px -14px rgba(0,0,0,.5);opacity:0;transform:translateY(6px);pointer-events:none;transition:opacity .35s ease,transform .35s ease}
 .about.open .aboutcard{opacity:1;transform:none;pointer-events:auto}
-.aboutl{font:500 12px Inter,sans-serif;color:rgba(255,255,255,.55);margin:0 0 10px}
-.aboutm{font:600 17px/1.4 Manrope,sans-serif;letter-spacing:-.005em;margin:0;padding-right:18px;text-wrap:pretty}
-.abouts{font:400 14px/1.5 Inter,sans-serif;color:rgba(255,255,255,.65);margin:8px 0 0}
-.aboutcard a{display:inline-block;margin-top:16px;font:600 14px Inter,sans-serif;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:2px}
+.aboutl{font:500 11px Inter,sans-serif;color:rgba(255,255,255,.55);margin:0 0 6px}
+.aboutm{font:600 14px/1.4 Manrope,sans-serif;margin:0;padding-right:16px;text-wrap:pretty}
+.abouts{font:400 12.5px/1.45 Inter,sans-serif;color:rgba(255,255,255,.6);margin:5px 0 0}
+.aboutcard a{display:inline-block;margin-top:10px;font:600 12.5px Inter,sans-serif;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:2px}
 .aboutcard a:hover{border-color:#fff}
-.aboutx{position:absolute;top:12px;right:12px;width:32px;height:32px;border:0;background:none;color:rgba(255,255,255,.55);font-size:20px;line-height:1;cursor:pointer;border-radius:50%}
+.aboutx{position:absolute;top:6px;right:6px;width:28px;height:28px;border:0;background:none;color:rgba(255,255,255,.55);font-size:17px;line-height:1;cursor:pointer;border-radius:50%}
 .aboutx:hover{color:#fff;background:rgba(255,255,255,.08)}
 @media(max-width:600px){.about{right:12px;bottom:12px}}
 @media(prefers-reduced-motion:reduce){.aboutcard,.aboutpill{transition:opacity .2s}}
