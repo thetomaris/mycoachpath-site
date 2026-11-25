@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Groundwork Assessment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* VOICE: grounded, calm, few words; every step answers "what do I get from this"
+   IDEA: the business as a living plant; the fix is upside down: front line on top, the owner holding from below
+   PICTURE: plant in layered soil on landing; a bonus org chart whose people glide from bottleneck to upside-down support
+   COLOUR and TYPE: forest green field, soil brown, coral accent for money and the one action; Manrope + Inter
+   LAYOUT: lots of white space, one column per step, one number per screen, one call to action */
+:root{color-scheme:light dark;
+--bg:light-dark(#ffffff,#0d1712);--ink:light-dark(#18231d,#e8efe9);--mut:light-dark(#5b6a61,#9db0a3);
+--field:light-dark(#1f3d2b,#16301f);--fieldInk:#f1f6f2;--soil:#6b4a2e;--soil2:#4e3420;
+--leaf:#5fa35a;--root:#c9a57a;--bloom:#ef6a5a;--acc:#ef6a5a;
+--line:light-dark(#e3eae5,#25392c);--card:light-dark(#f4f8f5,#142619)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:clip}
+h1,h2,h3{font-family:Manrope,Inter,sans-serif;line-height:1.08;text-wrap:balance;margin:0}
+h1{font-size:clamp(34px,5.2vw,54px);font-weight:800}
+h2{font-size:clamp(26px,3.4vw,36px);font-weight:700}
+h3{font-size:19px;font-weight:700}
+p{margin:0}
+.testbar{display:none;flex-wrap:wrap;gap:8px;align-items:center;padding:10px max(5vw,16px);background:var(--card);border-bottom:1px solid var(--line);font-size:13px;color:var(--mut)}
+.testbar button{font:500 13px Inter,sans-serif;min-height:34px;padding:0 12px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.testbar button[aria-current=true]{background:var(--field);color:var(--fieldInk);border-color:var(--field)}
+.testbar.show{display:flex}
+.exbar{height:42px;overflow:hidden;display:block;padding:0 16px;background:#0f2118;color:#dfe9e2;font-size:13px;text-align:center}
+.exin{transition:transform .7s cubic-bezier(.65,0,.35,1)}
+.exl>span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.exl>a{flex:none}
+.exl{height:42px;display:flex;align-items:center;justify-content:center;gap:18px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.exl .tk{display:inline-block}
+.exbar.promo .tk{animation:wob 1s ease .6s 2}
+@keyframes wob{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
+@media(max-width:520px){.exl{gap:10px;font-size:12px}}
+.exbar b{font-weight:600;color:#fff}
+.exbar a{color:#ffb3a8;text-underline-offset:3px}
+.offer{margin-top:clamp(64px,9vw,120px);padding:clamp(32px,5vw,64px);border-radius:24px;background:#0f2118;color:#eef4f0;scroll-margin-top:24px}
+.offer .kicker{color:#ffb3a8}
+.offer p{opacity:.85;margin-top:14px;max-width:36em}
+.offer ul{list-style:none;padding:0;margin:26px 0 30px;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 28px;max-width:720px}
+.offer li{display:flex;gap:12px;align-items:baseline;font-size:15px}
+.offer li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--acc);transform:translateY(-2px)}
+@media(max-width:600px){.offer ul{grid-template-columns:minmax(0,1fr)}}
+.proofline{font-size:13px;opacity:.6;margin-top:28px}
+.band{padding:clamp(40px,6vw,96px) max(5vw,16px)}
+.field{background:var(--field);color:var(--fieldInk)}
+.wrap{max-width:1100px;margin:0 auto}.narrow{max-width:640px;margin:0 auto}
+.brand{display:flex;justify-content:space-between;align-items:center;gap:12px;font:800 16px Manrope,sans-serif}
+.brand small{font:400 13px Inter,sans-serif;opacity:.7}
+.kicker{font:700 14px Manrope,sans-serif;color:var(--acc);margin-bottom:12px}
+.field .kicker{color:#ffb3a8}
+.hero{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:clamp(28px,6vw,80px);align-items:center;margin-top:clamp(28px,4vw,56px)}
+.lead{font-size:18px;margin-top:18px;max-width:32em;opacity:.9}
+.mut{color:var(--mut)}
+.meta{display:flex;flex-wrap:wrap;gap:20px;margin-top:20px;font-size:14px;opacity:.75}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 28px;border-radius:14px;border:0;background:var(--acc);color:#2a0d08;font:700 16px Manrope,sans-serif;cursor:pointer;text-decoration:none;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-1px);box-shadow:0 8px 20px -8px rgba(239,106,90,.6)}
+.btn:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.plant{width:100%;max-width:380px;justify-self:center;aspect-ratio:4/5}
+.plant svg{width:100%;height:100%;display:block}
+/* quiz */
+.progress{height:6px;background:var(--line);border-radius:6px;overflow:hidden;margin:20px 0 8px}
+.progress span{display:block;height:100%;background:var(--acc);transition:width .3s}
+.qtag{display:inline-block;font:700 13px Manrope,sans-serif;padding:5px 12px;border-radius:30px;margin-top:22px;background:var(--card)}
+.qtext{margin:16px 0 26px}
+.opts{display:grid;gap:12px}
+.opt{display:flex;gap:14px;align-items:center;text-align:left;width:100%;min-height:58px;padding:14px 18px;border-radius:14px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);font:16px/1.45 Inter,sans-serif;cursor:pointer;transition:border-color .15s,background .15s}
+.opt b{flex:none;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--card);font:700 13px Manrope,sans-serif}
+.opt:hover{border-color:var(--acc)}
+.opt[aria-pressed=true]{border-color:var(--acc);background:color-mix(in srgb,var(--acc) 10%,var(--bg))}
+.opt[aria-pressed=true] b{background:var(--acc);color:#2a0d08}
+.qnav{display:flex;justify-content:space-between;align-items:center;margin-top:24px;gap:12px;font-size:14px;color:var(--mut)}
+.link{background:none;border:0;color:var(--mut);font:500 15px Inter,sans-serif;cursor:pointer;min-height:44px;padding:0;text-decoration:underline;text-underline-offset:3px}
+/* cost of inaction */
+.big{font:800 clamp(56px,10vw,112px)/1 Manrope,sans-serif;color:var(--acc);margin:18px 0 8px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.years{display:grid;gap:12px;margin-top:34px;max-width:560px}
+.yr{display:grid;grid-template-columns:4.4em minmax(0,1fr) 6.6em;gap:12px;align-items:center;font-size:15px}
+.yr div{height:12px;border-radius:12px;background:rgba(255,255,255,.12);overflow:hidden}
+.yr div span{display:block;height:100%;background:var(--acc);border-radius:12px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
+.yr em{font-style:normal;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.split{display:flex;flex-wrap:wrap;gap:14px 40px;margin-top:28px;font-size:14px;opacity:.8}
+.split strong{display:block;font:700 20px Manrope,sans-serif;white-space:nowrap;opacity:1}
+.book{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;border-radius:20px;background:var(--card);padding:clamp(24px,4vw,40px)}
+.book p{margin-top:8px}
+details{margin-top:28px;border-top:1px solid var(--line)}
+summary{cursor:pointer;min-height:56px;display:flex;align-items:center;font:600 15px Inter,sans-serif;color:var(--mut)}
+.inputs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;padding:4px 0 18px}
+label{display:grid;gap:6px;font-weight:500;font-size:14px}
+input{font:16px Inter,sans-serif;min-height:50px;padding:0 14px;border-radius:10px;border:1.5px solid var(--line);background:var(--bg);color:var(--ink);width:100%}
+.unit{position:relative}.unit input{padding-left:28px}.unit::before{content:"$";position:absolute;left:12px;bottom:14px;color:var(--mut)}
+.bonus{max-width:620px;margin-top:clamp(56px,8vw,104px);padding-top:clamp(40px,6vw,64px);border-top:1px solid var(--line)}
+form{display:grid;gap:14px;margin-top:20px}
+.err{color:var(--acc);font-size:14px;min-height:20px}
+.check{display:flex;gap:10px;align-items:flex-start;font-weight:400;font-size:14px;color:var(--mut)}
+.check input{min-height:auto;width:20px;height:20px;margin-top:2px;flex:none}
+/* bonus org chart */
+.switch{position:relative;display:inline-grid;grid-template-columns:1fr 1fr;background:var(--card);border-radius:40px;padding:5px;margin-top:28px}
+.switch::before{content:"";position:absolute;top:5px;bottom:5px;left:5px;width:calc(50% - 5px);border-radius:40px;background:var(--field);transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.switch.new::before{transform:translateX(100%)}
+.switch .fill{position:absolute;top:5px;bottom:5px;left:50%;width:0;border-radius:40px;background:color-mix(in srgb,var(--acc) 28%,transparent)}
+.switch.run .fill{width:calc(50% - 5px);transition:width 2.4s linear}
+.switch.new .fill{opacity:0;transition:opacity .3s}
+.hint{font-size:13px;color:var(--mut);margin-top:10px;min-height:20px;transition:opacity .4s}
+.switch button{position:relative;z-index:1;min-height:46px;padding:0 22px;border:0;background:none;font:700 15px Manrope,sans-serif;color:var(--mut);cursor:pointer;border-radius:40px;transition:color .4s}
+.switch button[aria-pressed=true]{color:var(--fieldInk)}
+.stage{position:relative;aspect-ratio:44/26;margin-top:26px;border-radius:24px;background:var(--card);overflow:hidden}
+.stage svg{position:absolute;inset:0;width:100%;height:100%}
+.stage line{opacity:0;transition:opacity .7s ease}
+.stage.drawn .lines-today line{opacity:1;transition-delay:var(--d,0s)}
+.stage.new .lines-new line{opacity:1;transition-delay:calc(1s + var(--d,0s))}
+.lines-today{transition:opacity .5s}.lines-new{transition:opacity .7s .55s}
+.stage.new .lines-today{opacity:0}.stage:not(.new) .lines-new{opacity:0}
+.n{transition-delay:var(--d,0s)!important;position:absolute;transform:translate(-50%,-50%);border-radius:50%;width:clamp(16px,2.6vw,26px);aspect-ratio:1;background:var(--leaf);transition:left 1s cubic-bezier(.65,0,.35,1),top 1s cubic-bezier(.65,0,.35,1),width .8s,background .8s,border-radius .8s;box-shadow:0 2px 6px rgba(0,0,0,.12);display:grid;place-items:center;font:800 12px Manrope,sans-serif;color:#2b1a0b}
+.stage:not(.new) .n.own{animation:press 1.6s ease-in-out infinite}
+@keyframes press{0%,100%{box-shadow:0 0 0 0 rgba(239,106,90,.5)}50%{box-shadow:0 0 0 14px rgba(239,106,90,0)}}
+.stage.new .n.lead{background:var(--root);width:clamp(34px,5vw,50px)}
+.n.lead span{opacity:0;transition:opacity .4s}.stage.new .n.lead span{opacity:1;transition-delay:.9s}
+.n.own{width:auto;aspect-ratio:auto;padding:10px 18px;border-radius:40px;background:var(--acc);color:#2a0d08;font-size:14px;white-space:nowrap}
+.stage.new .n.own{background:var(--field);color:#fff}
+.rowlab{position:absolute;right:12px;background:var(--card);padding:2px 8px;border-radius:8px;font-size:13px;color:var(--mut);opacity:0;transition:opacity .5s;text-align:right;max-width:40%}
+.stage.new .rowlab{opacity:1;transition-delay:1.1s}
+.duo{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:30px}
+.duo div{padding-top:16px;border-top:2px solid var(--line)}
+.duo strong{display:block;font:800 clamp(30px,4vw,42px)/1 Manrope,sans-serif;font-variant-numeric:tabular-nums;white-space:nowrap}
+.duo .from{color:var(--mut)}.duo .to{color:var(--acc)}
+.duo span{display:block;font-size:14px;color:var(--mut);margin-top:8px}
+.replay{margin-top:14px}
+.hand{list-style:none;padding:0;margin:14px 0 0;display:grid;gap:10px}
+.hand li{display:flex;gap:12px;align-items:baseline}
+.hand li::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--leaf);transform:translateY(-2px)}
+.bk{display:grid;gap:10px;justify-items:center}
+.bknote{font-size:13px;color:var(--mut);text-align:center}
+.formrow{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center}
+.note{font-size:13px;color:var(--mut);margin-top:16px}
+footer{font-size:13px;color:var(--mut);text-align:center;padding:26px 16px;border-top:1px solid var(--line)}
+.step{display:none}.step.on{display:block;animation:fade .4s ease}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.exin{transition:none}.exl .tk{animation:none!important}.step.on,.n.own{animation:none!important}.n,.stage line,.switch .fill,.switch::before,.yr div span,.btn,.lines-new,.lines-today{transition:none!important}}
+@media(max-width:760px){.hero,.book{grid-template-columns:minmax(0,1fr)}.plant{max-width:250px}.duo{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:520px){.quotes,.inputs{grid-template-columns:minmax(0,1fr)}.yr{grid-template-columns:3.8em minmax(0,1fr) 6em}.rowlab{display:none}.stage{aspect-ratio:44/32}}
+</style>
+</head>
+<body>
+
+<div class="exbar" id="exbar" role="status">
+  <div class="exin">
+    <div class="exl"><span><b>Live example</b> · Built together in a My Coach Path Community Call</span><a href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Build yours with MCP</a></div>
+    <div class="exl"><span><span class="tk">🦃</span> <b>Thanksgiving special</b> · 1 free spot: your own Signature Lead Experience, built by MCP</span><a href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Claim it</a></div>
+    <div class="exl"><span>For the first booking by Nov 27 · Your context, MCP's build</span><a href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Claim it</a></div>
+  </div>
+</div>
+
+<div class="testbar" role="navigation" aria-label="Funnel preview">
+  <span>Funnel preview:</span>
+  <button data-go="1">1 Landing</button>
+  <button data-go="2">2 Assessment</button>
+  <button data-go="3">3 Cost of inaction</button>
+  <button data-go="4">4 Bonus: org chart</button>
+  <button id="reset">Reset</button>
+</div>
+
+<!-- PAGE 1: LANDING -->
+<section class="step" id="s1">
+  <div class="band field">
+    <div class="wrap">
+      <div class="brand"><span>Groundwork</span><small>Organizational coaching for founders</small></div>
+      <div class="hero">
+        <div>
+          <h1>Good people keep leaving. What is that costing you?</h1>
+          <p class="lead">Answer 10 quick questions and see the yearly cost of churn in your business, in dollars.</p>
+          <div style="margin-top:32px"><button class="btn" data-go="2">Calculate my number</button></div>
+          <div class="meta"><span>3 minutes</span><span>No sign up to see your number</span></div>
+          <p class="proofline">Tested live with 8 coaches on the MCP Community Call. 8 of 8 took something away.</p>
+        </div>
+        <div class="plant" id="plant1"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2: ASSESSMENT -->
+<section class="step" id="s2">
+  <div class="band">
+    <div class="narrow">
+      <div class="brand"><span>Groundwork Assessment</span><small id="qcount"></small></div>
+      <div class="progress" aria-hidden="true"><span id="pbar"></span></div>
+      <span class="qtag" id="qtag"></span>
+      <h2 class="qtext" id="qtext"></h2>
+      <div class="opts" id="opts" role="group" aria-labelledby="qtext"></div>
+      <div class="qnav"><button class="link" id="back">Back</button><span>Rough answers are fine.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3: COST OF INACTION (the result) -->
+<section class="step" id="s3">
+  <div class="band field">
+    <div class="wrap">
+      <div class="kicker">Your cost of inaction</div>
+      <h2 id="rtitle"></h2>
+      <div class="big" id="total">$0</div>
+      <p style="opacity:.85">per year, if nothing changes</p>
+      <div class="years" id="years"></div>
+      <div class="split" id="split"></div>
+    </div>
+  </div>
+  <div class="band">
+    <div class="wrap">
+      <p class="lead mut" id="rsum" style="margin-top:0"></p>
+      <div class="book" style="margin-top:36px">
+        <div>
+          <h2 id="bookh">Does this number surprise you?</h2>
+          <p class="mut">A number this size does not get solved by a free tool. In a 30 minute Groundwork Call we find out where your churn really comes from and what to fix first.</p>
+        </div>
+        <div class="bk"><a class="btn" href="https://calendly.com/honest-marketing/connect" target="_blank" rel="noopener">Book my Groundwork Call</a><span class="bknote">In your version, this opens your own calendar.</span></div>
+      </div>
+      <details id="adjust">
+        <summary>Adjust the numbers to your business</summary>
+        <div class="inputs">
+          <label>People who left per year<input type="number" id="left" min="0" step="1" inputmode="numeric"></label>
+          <label>Average yearly salary of those roles<span class="unit"><input type="number" id="salary" min="0" inputmode="numeric"></span></label>
+          <label>Months until a new hire runs on their own<input type="number" id="ramp" min="0" step="0.5" inputmode="decimal"></label>
+          <label>Your own hours per replacement<input type="number" id="hours" min="0" inputmode="numeric"></label>
+          <label>Value of one hour of your time<span class="unit"><input type="number" id="rate" min="0" inputmode="numeric"></span></label>
+          <label>Clients lost per year<input type="number" id="clients" min="0" step="1" inputmode="numeric"></label>
+          <label>Average yearly value per client<span class="unit"><input type="number" id="cval" min="0" inputmode="numeric"></span></label>
+        </div>
+        <p class="note" style="margin:0 0 18px">Per replacement: 20% of salary for recruiting and onboarding, half a salary during ramp up, plus your own hours. Lost clients on top.</p>
+      </details>
+
+      <div class="bonus">
+        <div>
+          <div class="kicker">Included with your result</div>
+          <h2>See what your business could look like when it stops running through you</h2>
+          <p class="mut" style="margin-top:12px">Built from your answers. Enter your details and it opens right away.</p>
+          <form id="lead" novalidate>
+            <label>First name<input id="fname" autocomplete="given-name"></label>
+            <label>Email<input id="email" type="email" autocomplete="email"></label>
+            <label class="check"><input type="checkbox" id="consent" checked>Send me the Groundwork notes. Short, every two weeks, unsubscribe anytime.</label>
+            <div class="err" id="err" role="alert"></div>
+            <div class="formrow"><button class="btn" type="submit">Reveal it</button><button class="link" type="button" id="skip">Skip, just show me</button></div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 4: BONUS ORG CHART -->
+<section class="step" id="s4">
+  <div class="band">
+    <div class="wrap">
+      <div class="kicker" id="bgreet">Prepared for you</div>
+      <h2>Your org chart, turned upside down</h2>
+      <p class="lead mut" style="margin-top:14px">Your front line knows more than anyone about what happens out there, so they go on top. Leads in the middle solve problems before they reach you. You hold it all from below.</p>
+      <div class="switch" id="switch" role="group" aria-label="Org chart view">
+        <i class="fill" aria-hidden="true"></i>
+        <button id="vToday" aria-pressed="true">Today</button>
+        <button id="vNew" aria-pressed="false">With groundwork</button>
+      </div>
+      <div class="hint" id="hint" aria-live="polite"></div>
+      <div class="stage" id="stage" role="img" aria-label="Org chart changing from everyone reporting to you, to front line on top, leads in the middle and you holding from below"></div>
+      <div class="duo" id="duo"></div>
+      <button class="link replay" id="replay">Replay</button>
+
+      <div class="book" style="margin-top:clamp(48px,7vw,80px)">
+        <div>
+          <h2>Want to build this for real?</h2>
+          <p class="mut">This is an example, not a plan. In a 30 minute Groundwork Call we look at your number, your team and what to change first.</p>
+        </div>
+        <div class="bk"><a class="btn" href="https://calendly.com/honest-marketing/connect" target="_blank" rel="noopener">Book my Groundwork Call</a><span class="bknote">In your version, this opens your own calendar.</span></div>
+      </div>
+      <p class="note">Example based on your answers.</p>
+
+      <div class="offer" id="build">
+        <div class="kicker">About this example</div>
+        <h2>Your own Signature Lead Experience, built on your framework</h2>
+        <p>This example was built together in a My Coach Path Community Call, from one member's framework. It does part of your prospect's homework before the first call, so the conversation starts deeper. You bring your framework and your clients' context. MCP handles the build, from questions and numbers to design and booking link.</p>
+        <ul>
+          <li>Assessment built on your own framework</li>
+          <li>Cost of inaction in your client's numbers</li>
+          <li>A takeaway that shows your thinking</li>
+          <li>Your brand, your booking link, ready to go live</li>
+        </ul>
+        <p style="margin:0 0 24px" id="tgline">Thanksgiving special: MCP is giving away a single free build. It goes to whoever books first, by Friday, November 27.</p>
+        <a class="btn" href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Build yours with MCP</a>
+        <p style="font-size:13px;opacity:.6;margin-top:16px" id="tgnote">This note will be updated once the free build is booked.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>© 2026 My Coach Path · MCP Community</footer>
+
+<script>
+{
+const Q=[
+ {t:"About you",q:"How long have you been running your business?",o:["Less than 5 years","5 to 10 years","10 to 20 years","More than 20 years"],v:[3,7,15,25]},
+ {t:"Your team",q:"How many people work in your business?",o:["1 to 5","6 to 15","16 to 40","More than 40"],v:[4,10,25,55]},
+ {t:"Churn",q:"How many people left in the last 12 months?",o:["Nobody","1 or 2","3 to 5","6 or more"],v:[0,2,4,8]},
+ {t:"Churn",q:"What does a typical role that turns over pay per year?",o:["Under $40k","$40k to $70k","$70k to $110k","Over $110k"],v:[35000,55000,90000,130000]},
+ {t:"Churn",q:"How long until a new hire runs on their own?",o:["Under a month","1 to 3 months","3 to 6 months","More than 6 months"],v:[0.5,2,4.5,8]},
+ {t:"Your time",q:"When someone leaves, who finds and trains the replacement?",o:["Someone else, fully","Someone else, but I am involved","Mostly me","Me, from start to finish"],v:[5,20,45,70]},
+ {t:"Your time",q:"How many decisions a week wait for your answer?",o:["Just a few","5 to 10","10 to 25","Pretty much everything"],v:[3,8,18,35]},
+ {t:"Clients",q:"How many clients did you lose in the last 12 months?",o:["None","1","2 or 3","4 or more"],v:[0,1,2.5,5]},
+ {t:"Clients",q:"What is an average client worth to you per year?",o:["Under $5k","$5k to $20k","$20k to $50k","Over $50k"],v:[3000,12000,35000,75000]},
+ {t:"Your instinct",q:"When a good person resigns, what is your first move?",o:["Offer them more money","Hire someone fast","Take the work on myself","Look at what made them leave"],v:[0,1,2,3]}
+];
+const DEF=[2,1,2,1,1,1,2,1,1,0];
+const S={step:1,i:0,ans:[],name:"",n:{},filled:false,timer:null};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const usd=n=>"$"+Math.round(n).toLocaleString("en-US");
+const A=i=>S.ans[i]??DEF[i];
+const V=i=>Q[i].v[A(i)];
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function plant(){
+  const leaves=[[200,250,-1],[200,205,1],[200,165,-1]].map(([x,y,d])=>`<path d="M${x},${y} C${x+d*30},${y-34} ${x+d*82},${y-30} ${x+d*96},${y-6} C${x+d*70},${y+12} ${x+d*28},${y+12} ${x},${y} Z" fill="var(--leaf)"/><path d="M${x},${y} C${x+d*40},${y-14} ${x+d*70},${y-12} ${x+d*92},${y-6}" stroke="#2f6b33" stroke-width="2" fill="none"/>`).join('');
+  const petals=Array.from({length:8},(_,i)=>`<ellipse cx="200" cy="78" rx="15" ry="34" fill="var(--bloom)" transform="rotate(${i*45} 200 112)"/>`).join('');
+  const roots=[[-1,60,90],[1,70,80],[-1,30,120],[1,36,118],[0,0,130]].map(([d,w,h])=>`<path d="M200,330 C${200+d*w*0.3},${330+h*0.4} ${200+d*w},${330+h*0.6} ${200+d*w*1.2},${330+h}" stroke="var(--root)" stroke-width="5" stroke-linecap="round" fill="none"/>`).join('');
+  return `<svg viewBox="0 0 400 500" role="img" aria-label="A growing plant with strong roots">
+   <rect x="0" y="330" width="400" height="170" rx="24" fill="var(--soil)"/><rect x="0" y="330" width="400" height="18" rx="9" fill="var(--soil2)"/>
+   ${Array.from({length:14},(_,i)=>`<circle cx="${20+i*28}" cy="${380+(i%3)*34}" r="${2+(i%2)}" fill="#8a6440"/>`).join('')}
+   ${roots}<path d="M200,330 C196,270 204,200 200,118" stroke="#3f7f3d" stroke-width="9" stroke-linecap="round" fill="none"/>${leaves}${petals}<circle cx="200" cy="112" r="20" fill="#ffd27a"/></svg>`;
+}
+$('plant1').innerHTML=plant();
+
+function renderQ(){
+  const q=Q[S.i];
+  $('qcount').textContent=`Question ${S.i+1} of ${Q.length}`;
+  $('pbar').style.width=(S.i/Q.length*100)+'%';
+  $('qtag').textContent=q.t;
+  $('qtext').textContent=q.q;
+  $('opts').innerHTML=q.o.map((t,j)=>`<button class="opt" data-v="${j}" aria-pressed="${S.ans[S.i]===j}"><b>${j+1}</b><span>${esc(t)}</span></button>`).join('');
+  $('back').style.visibility=S.i?'visible':'hidden';
+}
+function fillInputs(){
+  const m={left:V(2),salary:V(3),ramp:V(4),hours:V(5),rate:150,clients:V(7),cval:V(8)};
+  for(const k in m)$(k).value=m[k];
+  S.filled=true;
+}
+function num(id){const v=parseFloat($(id).value);return isFinite(v)&&v>0?v:0}
+function calc(){
+  const left=num('left'),sal=num('salary');
+  const perHire=sal*0.2+num('ramp')*(sal/12)*0.5+num('hours')*num('rate');
+  const churn=left*perHire,clients=num('clients')*num('cval'),total=churn+clients;
+  S.n={left,perHire,churn,clients,total,ownHours:left*num('hours'),team:V(1),dec:V(6)};
+  $('total').textContent=usd(total);
+  const max=total*3||1;
+  $('years').innerHTML=[1,2,3].map(y=>`<div class="yr"><span>Year ${y}</span><div><span style="width:${total*y/max*100}%"></span></div><em>${usd(total*y)}</em></div>`).join('');
+  $('split').innerHTML=[[usd(churn),"employee churn"],[usd(clients),"lost clients"],[Math.round(S.n.ownHours)+" h","of your own time"]].map(s=>`<div><strong>${s[0]}</strong>${s[1]}</div>`).join('');
+}
+document.querySelectorAll('.inputs input').forEach(el=>el.addEventListener('input',calc));
+
+function typeOf(){
+  const dep=(A(5)+A(6))/6,churn=(A(2)+A(7))/6;
+  if(dep>=0.5&&churn>=0.5)return ["Everything runs through you, and people keep leaving","Two patterns feed each other here. Decisions wait for you, so people cannot grow, so they leave, so you rehire and train again yourself."];
+  if(dep>=0.5)return ["Your business runs on you","Your team is mostly staying, but almost every answer still comes from you. That is why it feels so exhausting, and it is the next thing that will push good people out."];
+  if(churn>=0.5)return ["The revolving door","You are not in every decision, but people and clients leave faster than they should. Each exit quietly eats into profit, even when revenue looks fine."];
+  return ["Solid ground, with room to grow","Churn is low and the business does not hang on you for everything. Even so, every departure still costs this much, so it is worth protecting."];
+}
+function renderCost(){
+  if(!S.filled)fillInputs();
+  calc();
+  const [t,s]=typeOf();
+  const zero=S.n.total<1;
+  $('rtitle').textContent=zero?'No churn cost in the last 12 months':t;
+  $('rsum').textContent=zero?'Nobody left and no clients were lost. That is rare, and it usually rests on groundwork that is worth protecting as the business grows.':s;
+  $('bookh').textContent=zero?'Want to keep it that way?':'Does this number surprise you?';
+}
+
+/* bonus org chart: same people, two layouts; nodes glide between them */
+function layout(){
+  const team=Math.min(12,Math.max(5,Math.round(S.n.team/2.5)+3));
+  const leads=S.n.team<=5?1:S.n.team<=15?2:3;
+  const total=team+leads, xs=n=>Array.from({length:n},(_,i)=>8+84/(n-1||1)*i);
+  const xsC=n=>n===1?[50]:Array.from({length:n},(_,i)=>50-(n-1)*14+i*28);
+  const rowToday=xs(total), rowTop=xs(team), mid=xsC(leads);
+  const leadIdx=new Set(Array.from({length:leads},(_,k)=>Math.round((k+0.5)*total/leads-0.5)));
+  const nodes=[];let t=0,l=0;
+  for(let i=0;i<total;i++){
+    if(leadIdx.has(i)){nodes.push({lead:1,a:[rowToday[i],78],b:[mid[l],52],li:l});l++}
+    else{nodes.push({lead:0,a:[rowToday[i],78],b:[rowTop[t],16]});t++}
+  }
+  nodes.forEach(n=>{if(!n.lead){const k=Math.min(leads-1,Math.floor((n.b[0]-8)/84.0001*leads));n.to=k}});
+  return {nodes,own:{a:[50,22],b:[50,86]},mid};
+}
+function buildStage(){
+  const L=layout(),st=$('stage');
+  const ln=(x1,y1,x2,y2,c,w)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" vector-effect="non-scaling-stroke" stroke-linecap="round" style="--d:${(Math.random()*0.35).toFixed(2)}s"/>`;
+  const today=L.nodes.map(n=>ln(n.a[0],n.a[1],L.own.a[0],L.own.a[1],'var(--acc)',1.5)).join('');
+  const nw=L.nodes.map(n=>n.lead?ln(n.b[0],n.b[1],L.own.b[0],L.own.b[1],'var(--root)',3):ln(n.b[0],n.b[1],L.mid[n.to],52,'var(--leaf)',1.5)).join('');
+  st.innerHTML=`<svg viewBox="0 0 100 100" preserveAspectRatio="none"><g class="lines-today">${today}</g><g class="lines-new">${nw}</g></svg>`+
+   L.nodes.map((n,i)=>`<div class="n${n.lead?' lead':''}" style="--d:${(i*0.045).toFixed(3)}s" data-a="${n.a}" data-b="${n.b}"><span>${n.lead?'Lead':''}</span></div>`).join('')+
+   `<div class="n own" style="--d:.25s" data-a="${L.own.a}" data-b="${L.own.b}">You</div>`+
+   `<div class="rowlab" style="top:27%">Front line: your intelligence</div><div class="rowlab" style="top:61%">Leads solve it downstream</div>`;
+  place(false,true);
+}
+function place(isNew,instant){
+  const st=$('stage');
+  st.classList.toggle('new',isNew);
+  st.querySelectorAll('.n').forEach(el=>{const p=el.dataset[isNew?'b':'a'].split(',');
+    if(instant)el.style.transition='none';
+    el.style.left=p[0]+'%';el.style.top=p[1]+'%';
+    if(instant){void el.offsetWidth;el.style.transition=''}});
+  $('switch').classList.toggle('new',isNew);
+  $('vToday').setAttribute('aria-pressed',String(!isNew));$('vNew').setAttribute('aria-pressed',String(isNew));
+  count(isNew);
+}
+function count(isNew){
+  const d=S.n.dec,d2=Math.max(2,Math.round(d*0.25)),hrs=Math.round((d-d2)*0.4*46);
+  $('duo').innerHTML=`<div><strong class="from">${d}</strong><span>decisions a week waiting for you today</span></div><div><strong class="to" id="dnum">${isNew?d:d}</strong><span>decisions a week that still need you</span></div><div><strong class="to" id="hnum">${isNew?0:0} h</strong><span>back on your calendar per year</span></div>`;
+  if(!isNew)return;
+  const t0=performance.now(),dur=reduce?0:1200;
+  const tick=now=>{const k=dur?Math.min(1,(now-t0)/dur):1,e=1-Math.pow(1-k,3);
+    if($('dnum')){$('dnum').textContent=Math.round(d-(d-d2)*e);$('hnum').textContent=Math.round(hrs*e)+' h'}
+    if(k<1)requestAnimationFrame(tick)};
+  requestAnimationFrame(tick);
+}
+function playChart(){
+  clearTimeout(S.timer);
+  const sw=$('switch'),st=$('stage');
+  st.classList.remove('drawn');place(false,true);
+  sw.classList.remove('run');void sw.offsetWidth;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{st.classList.add('drawn');sw.classList.add('run')}));
+  $('hint').textContent='Today: every line runs to you. Watch what changes.';
+  S.timer=setTimeout(()=>{sw.classList.remove('run');place(true);$('hint').textContent='Same people. Different structure.'},reduce?800:2600);
+}
+function startWhenVisible(){
+  if(S.io)S.io.disconnect();
+  if(!('IntersectionObserver' in window)){playChart();return}
+  S.io=new IntersectionObserver(es=>{if(es.some(x=>x.isIntersecting)){S.io.disconnect();playChart()}},{threshold:.45});
+  S.io.observe($('stage'));
+}
+function renderBonus(){
+  if(!S.filled)fillInputs();
+  calc();
+  $('bgreet').textContent=S.name?`Prepared for ${S.name}`:'Prepared for you';
+  buildStage();
+  startWhenVisible();
+}
+
+function go(n,fromHash){
+  if(!fromHash&&!S.preview&&n>1){try{location.hash='step-'+n}catch(e){}}
+  S.step=n;clearTimeout(S.timer);
+  document.querySelectorAll('.step').forEach((s,i)=>s.classList.toggle('on',i+1===n));
+  document.querySelectorAll('.testbar [data-go]').forEach(b=>b.setAttribute('aria-current',String(+b.dataset.go===n)));
+  if(n===2)renderQ();
+  if(n===3)renderCost();
+  if(n===4)renderBonus();
+  window.scrollTo(0,0);
+}
+document.addEventListener('click',e=>{
+  const g=e.target.closest('[data-go]');if(g){go(+g.dataset.go);return}
+  const o=e.target.closest('.opt');if(o){
+    S.ans[S.i]=+o.dataset.v;S.filled=false;
+    document.querySelectorAll('.opt').forEach(b=>b.setAttribute('aria-pressed',String(b===o)));
+    setTimeout(()=>{if(S.i<Q.length-1){S.i++;renderQ()}else go(3)},250);
+  }
+});
+$('vToday').addEventListener('click',()=>{clearTimeout(S.timer);$('switch').classList.remove('run');place(false);$('hint').textContent=''});
+$('vNew').addEventListener('click',()=>{clearTimeout(S.timer);$('switch').classList.remove('run');place(true);$('hint').textContent=''});
+$('replay').addEventListener('click',playChart);
+$('back').addEventListener('click',()=>{if(S.i>0){S.i--;renderQ()}});
+$('reset').addEventListener('click',()=>{S.i=0;S.ans=[];S.name="";S.filled=false;$('lead').reset();$('adjust').open=false;$('err').textContent="";go(1)});
+$('skip').addEventListener('click',()=>{$('err').textContent='';go(4)});
+$('lead').addEventListener('submit',e=>{
+  e.preventDefault();
+  const f=$('fname').value.trim(),m=$('email').value.trim();
+  if(!f){$('err').textContent="Please add your first name.";$('fname').focus();return}
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(m)){$('err').textContent="Please check your email address.";$('email').focus();return}
+  $('err').textContent="";S.name=f;go(4);
+});
+document.addEventListener('keydown',e=>{
+  if(S.step!==2||e.target.tagName==='INPUT')return;
+  const idx='1234'.indexOf(e.key);if(idx>=0){const b=document.querySelectorAll('.opt')[idx];if(b)b.click()}
+});
+const ex=$('exbar'),exin=ex.querySelector('.exin');let exI=0,exHover=false;
+ex.addEventListener('mouseenter',()=>{exHover=true});ex.addEventListener('mouseleave',()=>{exHover=false});
+function rot(){if(!exHover){exI=(exI+1)%3;exin.style.transform=`translateY(${-42*exI}px)`;ex.classList.toggle('promo',exI===1)}setTimeout(rot,exI===0?5000:4500)}
+const TG_END=Date.parse('2026-11-27T22:59:00Z');
+if(Date.now()>TG_END){$('tgline').textContent='The Thanksgiving free build offer has ended.';$('tgnote').remove()}else setTimeout(rot,3000);
+S.preview=location.hash==='#preview';
+if(S.preview)document.querySelector('.testbar').classList.add('show');
+window.addEventListener('hashchange',()=>{if(S.preview)return;const m=/^#step-([2-4])$/.exec(location.hash);const n=m?+m[1]:1;if(n!==S.step)go(n,true)});
+go(1);
+}
+</script>
+</body>
+</html>
