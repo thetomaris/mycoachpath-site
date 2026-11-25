@@ -285,6 +285,21 @@ footer{font-size:13px;color:var(--mut);text-align:center;padding:26px 16px;borde
       </div>
       <p class="note">Example based on your answers.</p>
 
+      <div class="offer" id="build">
+        <div class="kicker">About this example</div>
+        <h2>Your own Signature Lead Experience, built on your framework</h2>
+        <p>This example was built together in a My Coach Path Community Call, from one member's framework. It does part of your prospect's homework before the first call, so the conversation starts deeper. You bring your framework and your clients' context. MCP handles the build, from questions and numbers to design and booking link.</p>
+        <ul>
+          <li>Assessment built on your own framework</li>
+          <li>Cost of inaction in your client's numbers</li>
+          <li>A takeaway that shows your thinking</li>
+          <li>Your brand, your booking link, ready to go live</li>
+        </ul>
+        <p style="margin:0 0 24px" id="tgline">Thanksgiving special: MCP is giving away a single free build. It goes to whoever books first, by Friday, November 27.</p>
+        <a class="btn" href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Build yours with MCP</a>
+        <p style="font-size:13px;opacity:.6;margin-top:16px" id="tgnote">This note will be updated once the free build is booked.</p>
+      </div>
+
     </div>
   </div>
 </section>
@@ -476,6 +491,7 @@ document.addEventListener('keydown',e=>{
   if(S.step!==2||e.target.tagName==='INPUT')return;
   const idx='1234'.indexOf(e.key);if(idx>=0){const b=document.querySelectorAll('.opt')[idx];if(b)b.click()}
 });
+if(Date.now()>Date.parse('2026-11-27T22:59:00Z')){const t=$('tgline');if(t)t.textContent='The Thanksgiving free build offer has ended.';const n=$('tgnote');if(n)n.remove()}
 S.preview=location.hash==='#preview';
 if(S.preview)document.querySelector('.testbar').classList.add('show');
 window.addEventListener('hashchange',()=>{if(S.preview)return;const m=/^#step-([2-4])$/.exec(location.hash);const n=m?+m[1]:1;if(n!==S.step)go(n,true)});

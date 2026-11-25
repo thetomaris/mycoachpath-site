@@ -7,142 +7,61 @@
 <meta name="description" content="A Signature Lead Experience, built live with coaches in the My Coach Path Community. Try the example.">
 <link rel="icon" type="image/png" href="mcp-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* VOICE: quiet, confident, gallery-like; the example does the talking
-   IDEA: a showcase wall: My Coach Path presents one piece of work in a frame
-   PICTURE: the live Groundwork demo inside a calm browser window, fully clickable
-   COLOUR and TYPE: black and white with soft greys, one coral accent for the offer; Manrope + Inter
-   LAYOUT: ticker, short intro, framed demo, three facts, offer, footer */
-:root{--bg:#fafaf8;--ink:#111;--mut:#6b6f6c;--line:#e6e6e2;--acc:#ef6a5a}
+/* VOICE: quiet preview toolbar, the example does the talking
+   IDEA: a template preview: a slim MCP bar over a full-screen live demo
+   PICTURE: the Groundwork demo itself, edge to edge
+   COLOUR and TYPE: black bar, white text, one coral button; Manrope + Inter
+   LAYOUT: fixed 56px toolbar, iframe fills the rest of the screen */
 *{box-sizing:border-box;min-width:0}
-body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 Inter,system-ui,sans-serif;overflow-x:clip;-webkit-font-smoothing:antialiased}
-h1,h2,h3{font-family:Manrope,Inter,sans-serif;line-height:1.08;text-wrap:balance;margin:0;letter-spacing:-.015em}
-p{margin:0}
-a{color:inherit}
-/* ticker */
-.exbar{height:50px;overflow:hidden;padding:0 16px;background:#000;color:#fff;font:500 15px/1.3 Inter,sans-serif;text-align:center}
-.exin{transition:transform .7s cubic-bezier(.65,0,.35,1)}
-.exl{height:50px;display:flex;align-items:center;justify-content:center;gap:18px;white-space:nowrap;overflow:hidden}
-.exl>span{min-width:0;overflow:hidden;text-overflow:ellipsis}
-.exl>a{flex:none;color:#ff8a78;font-weight:600;text-underline-offset:3px}
-.exl b{font-weight:600}
-.exl .tk{display:inline-block}
-.exbar.promo .tk{animation:wob 1s ease .6s 2}
-@keyframes wob{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
-.exl .sm{display:none}
-/* layout */
-.wrap{max-width:1180px;margin:0 auto;padding:0 max(4vw,16px)}
-header.top{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:26px 0}
+html,body{margin:0;height:100%;background:#000;overflow:hidden}
+body{display:flex;flex-direction:column;font:15px/1.3 Inter,system-ui,sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
+.bar{flex:none;height:56px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:20px;padding:0 18px;background:#000;border-bottom:1px solid rgba(255,255,255,.08)}
 .logo{display:flex;align-items:center}
-.logo img{display:block;height:34px;width:auto}
-.logo i{width:26px;height:26px;border-radius:50%;background:#111;display:grid;place-items:center}
-.logo i::after{content:"";width:10px;height:10px;border-radius:50%;border:2px solid #fff}
-.top small{font-size:13px;color:var(--mut)}
-.intro{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(24px,5vw,80px);align-items:end;padding:clamp(20px,4vw,56px) 0 clamp(28px,4vw,44px)}
-.kick{font:500 13px Inter,sans-serif;color:var(--mut);margin-bottom:16px}
-h1{font-size:clamp(34px,5vw,56px);font-weight:800}
-.intro p{color:var(--mut);font-size:17px;max-width:30em}
-.intro p+p{margin-top:12px}
-.intro b{color:var(--ink);font-weight:600}
-/* browser frame */
-.frame{border-radius:18px;background:#fff;box-shadow:0 1px 0 rgba(0,0,0,.04),0 40px 80px -40px rgba(0,0,0,.35);border:1px solid var(--line);overflow:hidden}
-.chrome{height:44px;display:flex;align-items:center;gap:14px;padding:0 16px;border-bottom:1px solid var(--line);background:#f4f4f1}
-.dots{display:flex;gap:7px}.dots i{width:11px;height:11px;border-radius:50%;background:#d9d9d4}
-.addr{flex:1;max-width:420px;margin:0 auto;height:28px;border-radius:8px;background:#fff;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-size:12.5px;color:var(--mut)}
-.chrome .tag{font-size:12px;color:var(--mut)}
-iframe{display:block;width:100%;height:min(860px,84vh);border:0;background:#1f3d2b}
-.hint{font-size:13px;color:var(--mut);text-align:center;margin-top:14px}
-/* facts */
-.facts{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(20px,4vw,48px);padding:clamp(56px,8vw,104px) 0 clamp(40px,6vw,72px)}
-.facts h3{font-size:18px;margin-bottom:8px}
-.facts p{color:var(--mut);font-size:15px}
-.facts div{border-top:1px solid #111;padding-top:18px}
-/* offer */
-.offer{background:#000;color:#fff;border-radius:22px;padding:clamp(32px,5vw,64px);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:clamp(24px,5vw,64px);align-items:end}
-.offer .kick{color:rgba(255,255,255,.55)}
-.offer h2{font-size:clamp(28px,3.6vw,40px);font-weight:800}
-.offer p{color:rgba(255,255,255,.72);margin-top:14px;max-width:34em}
-.offer .tg{margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.15);color:#fff}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:54px;padding:0 28px;border-radius:14px;background:var(--acc);color:#2a0d08;font:700 16px Manrope,sans-serif;text-decoration:none;transition:transform .15s}
-.btn:hover{transform:translateY(-1px)}
-.btn:focus-visible,a:focus-visible{outline:3px solid var(--acc);outline-offset:3px}
-.offer .side{display:grid;gap:12px;justify-items:start}
-.offer .side small{font-size:13px;color:rgba(255,255,255,.55)}
-footer{text-align:center;font-size:13px;color:var(--mut);padding:44px 16px 36px}
-@media(max-width:860px){.intro,.offer{grid-template-columns:minmax(0,1fr)}.facts{grid-template-columns:minmax(0,1fr)}}
-@media(max-width:600px){
- .exl{gap:12px;font-size:14px}.exl .lg{display:none}.exl .sm{display:inline}
- .wrap{padding:0 12px}
- .chrome{height:36px}.addr,.chrome .tag{display:none}
- iframe{height:calc(100svh - 120px)}
- .frame{border-radius:14px}
+.logo img{display:block;height:28px;width:auto}
+.logo .mk{display:none;height:28px}
+.msg{height:56px;overflow:hidden;text-align:center}
+.msgin{transition:transform .7s cubic-bezier(.65,0,.35,1)}
+.ml{height:56px;display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:rgba(255,255,255,.78)}
+.ml span{overflow:hidden;text-overflow:ellipsis}
+.ml b{color:#fff;font-weight:600}
+.ml .tk{display:inline-block;margin-right:6px}
+.promo .tk{animation:wob 1s ease .6s 2}
+@keyframes wob{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
+.ml .sm{display:none}
+.cta{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:10px;background:#ef6a5a;color:#2a0d08;font:700 14px Manrope,sans-serif;text-decoration:none;white-space:nowrap;transition:transform .15s}
+.cta:hover{transform:translateY(-1px)}
+.cta:focus-visible{outline:3px solid #ef6a5a;outline-offset:3px}
+iframe{flex:1;display:block;width:100%;border:0;background:#1f3d2b}
+@media(max-width:760px){
+ .bar{gap:12px;padding:0 12px;height:52px}.msg,.ml{height:52px}
+ .logo .full{display:none}.logo .mk{display:block}
+ .ml{font-size:13px}.ml .lg{display:none}.ml .sm{display:inline}
+ .cta{height:34px;padding:0 12px;font-size:13px}
 }
-@media(prefers-reduced-motion:reduce){.exin{transition:none}.exl .tk{animation:none!important}.btn{transition:none}}
+@media(prefers-reduced-motion:reduce){.msgin{transition:none}.ml .tk{animation:none!important}}
 </style>
 </head>
 <body>
-
-<div class="exbar" id="exbar" role="status">
-  <div class="exin">
-    <div class="exl"><span class="lg"><b>Community Showcase</b> · Built live in a My Coach Path Community Call</span><span class="sm"><b>Community Showcase</b> · MCP</span><a href="#offer">Build yours</a></div>
-    <div class="exl"><span class="lg"><span class="tk">🦃</span> <b>Thanksgiving special</b> · 1 free spot: your own Signature Lead Experience, built by MCP</span><span class="sm"><span class="tk">🦃</span> <b>Thanksgiving:</b> 1 free build</span><a href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Claim it</a></div>
-    <div class="exl"><span class="lg">For the first booking by Nov 27 · Your context, MCP's build</span><span class="sm">First booking by Nov 27</span><a href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Claim it</a></div>
-  </div>
-</div>
-
-<div class="wrap">
-  <header class="top">
-    <a class="logo" href="https://mycoachpath.com"><img src="mcp-logo.png" alt="My Coach Path" width="120" height="37"></a>
-    <small>Community Showcase</small>
-  </header>
-
-  <section class="intro">
-    <div>
-      <div class="kick">Signature Lead Experience · November 25, 2026</div>
-      <h1>Built live with our community. Try it like a prospect would.</h1>
-    </div>
-    <div>
-      <p>Coaches in the My Coach Path Community Call shaped this assessment in real time, starting from one member's framework on employee churn.</p>
-      <p><b>Groundwork</b> is a demo brand. Click through all four steps below.</p>
-    </div>
-  </section>
-
-  <div class="frame">
-    <div class="chrome"><div class="dots" aria-hidden="true"><i></i><i></i><i></i></div><div class="addr">yourbrand.com/assessment</div><span class="tag">Example</span></div>
-    <iframe src="demo/" title="Groundwork demo: churn cost assessment" loading="eager"></iframe>
-  </div>
-  <p class="hint">Fully interactive. Your answers stay in your browser.</p>
-
-  <section class="facts">
-    <div><h3>Does the homework first</h3><p>Prospects see what the problem costs them in their own numbers, before the first call.</p></div>
-    <div><h3>Opens the right conversation</h3><p>The result points to possible causes without solving them, so the call starts deeper.</p></div>
-    <div><h3>Leaves a takeaway</h3><p>A small bonus that shows how you think, here an upside-down org chart.</p></div>
-  </section>
-
-  <section class="offer" id="offer">
-    <div>
-      <div class="kick">For coaches</div>
-      <h2>Your own Signature Lead Experience, built on your framework</h2>
-      <p>You bring your framework and your clients' context. MCP handles the build, from questions and numbers to design and booking link.</p>
-      <p class="tg" id="tgline"><b>Thanksgiving special:</b> MCP is giving away a single free build. It goes to whoever books first, by Friday, November 27.</p>
-    </div>
-    <div class="side">
-      <a class="btn" href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Build yours with MCP</a>
-      <small>15 minute intro call</small>
-    </div>
-  </section>
-</div>
-
-<footer>© 2026 My Coach Path · MCP Community</footer>
-
+<header class="bar">
+  <a class="logo" href="https://mycoachpath.com" aria-label="My Coach Path"><img class="full" src="mcp-logo-white.png" alt="My Coach Path"><img class="mk" src="mcp-mark-white.png" alt=""></a>
+  <div class="msg" role="status"><div class="msgin" id="msgin">
+    <div class="ml"><span class="lg"><b>Community Showcase</b> · Built live in a My Coach Path Community Call · Groundwork is a demo brand</span><span class="sm"><b>Showcase</b> · Groundwork is a demo brand</span></div>
+    <div class="ml"><span class="lg"><span class="tk">🦃</span><b>Thanksgiving special</b> · 1 free spot: your own Signature Lead Experience, built by MCP</span><span class="sm"><span class="tk">🦃</span><b>Thanksgiving:</b> 1 free build</span></div>
+    <div class="ml"><span class="lg">For the first booking by Nov 27 · Your context, MCP's build</span><span class="sm">First booking by Nov 27</span></div>
+  </div></div>
+  <a class="cta" href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Build yours</a>
+</header>
+<iframe src="demo/" title="Groundwork demo: churn cost assessment"></iframe>
 <script>
 {
-const ex=document.getElementById('exbar'),exin=ex.querySelector('.exin');let i=0,hover=false;
-ex.addEventListener('mouseenter',()=>{hover=true});ex.addEventListener('mouseleave',()=>{hover=false});
+const bar=document.querySelector('.msg'),inn=document.getElementById('msgin');let i=0,hover=false;
+bar.addEventListener('mouseenter',()=>{hover=true});bar.addEventListener('mouseleave',()=>{hover=false});
 const END=Date.parse('2026-11-27T22:59:00Z');
-function rot(){if(!hover){i=(i+1)%3;exin.style.transform=`translateY(${-50*i}px)`;ex.classList.toggle('promo',i===1)}setTimeout(rot,i===0?5000:4500)}
-if(Date.now()>END){document.getElementById('tgline').textContent='The Thanksgiving free build offer has ended.'}else setTimeout(rot,3000);
+function h(){return bar.clientHeight||56}
+function rot(){if(!hover){i=(i+1)%3;inn.style.transform=`translateY(${-h()*i}px)`;bar.classList.toggle('promo',i===1)}setTimeout(rot,i===0?6000:4500)}
+if(Date.now()<END)setTimeout(rot,4000);
 }
 </script>
 </body>
