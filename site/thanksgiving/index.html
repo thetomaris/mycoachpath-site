@@ -43,16 +43,21 @@ a:focus-visible,button:focus-visible{outline:3px solid #ef6a5a;outline-offset:3p
 .popcard h1{margin:0 0 14px;font:800 clamp(28px,3.4vw,38px)/1.08 Manrope,sans-serif;letter-spacing:-.02em;text-wrap:balance}
 .popcard p{margin:0;color:#5c605d;font-size:16px;line-height:1.55}
 .popcard .popn{margin-top:10px;font-size:14px;color:#8a8e8b}
-.popb{margin-top:26px;min-height:52px;padding:0 26px;border:0;border-radius:14px;background:#111;color:#fff;font:700 16px Manrope,sans-serif;cursor:pointer;transition:transform .15s}
+.popb{position:relative;overflow:hidden;margin-top:26px;min-height:52px;padding:0 26px;border:0;border-radius:14px;background:#111;color:#fff;font:700 16px Manrope,sans-serif;cursor:pointer;transition:transform .15s}
+.popb span{position:relative}
+.popb::before{content:"";position:absolute;inset:0;width:0;background:#3a3a3a;animation:fill 7s linear 1s forwards}
+@keyframes fill{to{width:100%}}
 .popb:hover{transform:translateY(-1px)}
 body.go .pop{opacity:0;visibility:hidden}
 body.go .popcard{transform:scale(.96);opacity:0}
 iframe{flex:1;display:block;width:100%;border:0;background:#1f3d2b}
 @media(max-width:760px){
- .bar{gap:12px;padding:0 12px;height:52px}.msg,.ml{height:52px}
- .logo img{height:22px}
- .ml{font-size:13px}.ml .lg{display:none}.ml .sm{display:inline}
- .cta{height:34px;padding:0 12px;font-size:13px}
+ .bar{height:auto;grid-template-columns:auto auto;grid-template-areas:"logo cta" "msg msg";justify-content:space-between;gap:0 12px;padding:10px 14px 0}
+ .logo{grid-area:logo}.cta{grid-area:cta;justify-self:end;height:34px;padding:0 14px;font-size:13px}
+ .logo img{height:24px}
+ .msg{grid-area:msg;height:40px;margin:8px -14px 0;border-top:1px solid rgba(255,255,255,.12)}
+ .ml{height:40px;font-size:14px;padding:0 14px;color:rgba(255,255,255,.85)}
+ .ml .lg{display:none}.ml .sm{display:inline}
 }
 @media(prefers-reduced-motion:reduce){.msgin,.pop,.popcard{transition:none}.popcard{animation:none}.ml .tk{animation:none!important}}
 </style>
@@ -75,7 +80,7 @@ iframe{flex:1;display:block;width:100%;border:0;background:#1f3d2b}
       <h1 id="popH">An assessment that shows prospects what their problem costs them</h1>
       <p>In a few minutes it turns their answers into a dollar figure and leads them to a call with you. This one was built live with coaches in the My Coach Path Community Call, from one member's framework on employee churn.</p>
       <p class="popn">Groundwork is a demo brand.</p>
-      <button class="popb" id="start">Start the experience</button>
+      <button class="popb" id="start"><span>Start the experience</span></button>
     </div>
   </div>
   <iframe src="demo/" title="Groundwork demo: churn cost assessment"></iframe>
@@ -85,8 +90,8 @@ iframe{flex:1;display:block;width:100%;border:0;background:#1f3d2b}
 {
 const b=document.body;
 const start=()=>{if(b.classList.contains('go'))return;b.classList.add('go');};
-document.getElementById('start').addEventListener('click',start);
-document.getElementById('start').focus({preventScroll:true});
+const sb=document.getElementById('start');sb.addEventListener('click',start);sb.addEventListener('animationend',e=>{if(e.animationName==='fill')start()});
+sb.focus({preventScroll:true});
 const bar=document.querySelector('.msg'),inn=document.getElementById('msgin');let i=0,hover=false;
 bar.addEventListener('mouseenter',()=>{hover=true});bar.addEventListener('mouseleave',()=>{hover=false});
 const END=Date.parse('2026-11-27T22:59:00Z');
