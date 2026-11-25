@@ -30,8 +30,8 @@ body{display:flex;flex-direction:column;background:#f4f3ef;color:#111;font:15px/
 .promo .tk{animation:wob 1s ease .6s 2}
 @keyframes wob{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
 .ml .sm{display:none}
-.cta{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:10px;background:#ef6a5a;color:#2a0d08;font:700 14px Manrope,sans-serif;text-decoration:none;white-space:nowrap;transition:transform .15s}
-.cta:hover{transform:translateY(-1px)}
+.cta{color:#fff;font:600 14px Inter,sans-serif;text-decoration:underline;text-decoration-color:rgba(255,255,255,.45);text-underline-offset:4px;white-space:nowrap;transition:text-decoration-color .2s}
+.cta:hover{text-decoration-color:#fff}
 a:focus-visible,button:focus-visible{outline:3px solid #ef6a5a;outline-offset:3px}
 /* stage */
 .stage{flex:1;display:flex;flex-direction:column}
@@ -53,7 +53,7 @@ body.go .popcard{transform:scale(.96);opacity:0}
 iframe{flex:1;display:block;width:100%;border:0;background:#1f3d2b}
 @media(max-width:760px){
  .bar{height:auto;grid-template-columns:auto auto;grid-template-areas:"logo cta" "msg msg";justify-content:space-between;gap:0 12px;padding:10px 14px 0}
- .logo{grid-area:logo}.cta{grid-area:cta;justify-self:end;height:34px;padding:0 14px;font-size:13px}
+ .logo{grid-area:logo}.cta{grid-area:cta;justify-self:end;font-size:14px}
  .logo img{height:24px}
  .msg{grid-area:msg;height:40px;margin:8px -14px 0;border-top:1px solid rgba(255,255,255,.12)}
  .ml{height:40px;font-size:14px;padding:0 14px;color:rgba(255,255,255,.85)}
@@ -66,9 +66,9 @@ iframe{flex:1;display:block;width:100%;border:0;background:#1f3d2b}
 <header class="bar">
   <div class="logo"><img src="mcp-logo-white.png" alt="My Coach Path"></div>
   <div class="msg" role="status"><div class="msgin" id="msgin">
-    <div class="ml"><span class="lg"><b>Community Showcase</b> · Built live in a My Coach Path Community Call · Groundwork is a demo brand</span><span class="sm"><b>Showcase</b> · Groundwork is a demo brand</span></div>
-    <div class="ml"><span class="lg"><span class="tk">🦃</span><b>Thanksgiving special</b> · 1 free spot: your own Signature Lead Experience, built by MCP</span><span class="sm"><span class="tk">🦃</span><b>Thanksgiving:</b> 1 free build</span></div>
-    <div class="ml"><span class="lg">For the first booking by Nov 27 · Your context, MCP's build</span><span class="sm">First booking by Nov 27</span></div>
+    <div class="ml"><span class="lg"><b>Community Showcase</b> · Built live in a My Coach Path Community Call · Groundwork is a demo brand</span><span class="sm">Example built live in the <b>MCP Community</b></span></div>
+    <div class="ml"><span class="lg"><span class="tk">🦃</span><b>Thanksgiving special</b> · 1 free spot: your own Signature Lead Experience, built by MCP</span><span class="sm"><span class="tk">🦃</span><b>Thanksgiving:</b> MCP builds yours for free</span></div>
+    <div class="ml"><span class="lg">For the first booking by Nov 27 · Your context, MCP's build</span><span class="sm">1 free spot · first booking by Nov 27</span></div>
   </div></div>
   <a class="cta" href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Build yours</a>
 </header>
