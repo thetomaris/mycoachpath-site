@@ -7,23 +7,24 @@
 <meta name="description" content="A Signature Lead Experience, built live with coaches in the My Coach Path Community. Try the example.">
 <link rel="icon" type="image/png" href="mcp-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-/* VOICE: quiet preview toolbar, the example does the talking
-   IDEA: a template preview: a slim MCP bar over a full-screen live demo
-   PICTURE: the Groundwork demo itself, edge to edge
-   COLOUR and TYPE: black bar, white text, one coral button; Manrope + Inter
-   LAYOUT: fixed 56px toolbar, iframe fills the rest of the screen */
+/* VOICE: quiet preview, the example does the talking
+   IDEA: a Mac window on a showcase wall that maximises itself, like pressing the green button
+   PICTURE: the live Groundwork demo in a browser window that grows to full screen
+   COLOUR and TYPE: black bar, warm off-white wall, Mac window chrome, one coral button; Manrope + Inter
+   LAYOUT: bar, one-line intro, big window; after a beat the window fills everything under the bar */
 *{box-sizing:border-box;min-width:0}
-html,body{margin:0;height:100%;background:#000;overflow:hidden}
-body{display:flex;flex-direction:column;font:15px/1.3 Inter,system-ui,sans-serif;color:#fff;-webkit-font-smoothing:antialiased}
-.bar{flex:none;height:56px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:20px;padding:0 18px;background:#000;border-bottom:1px solid rgba(255,255,255,.08)}
+html,body{margin:0;height:100%;overflow:hidden}
+body{display:flex;flex-direction:column;background:#f4f3ef;color:#111;font:15px/1.4 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+/* bar */
+.bar{flex:none;height:56px;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:20px;padding:0 18px;background:#000;color:#fff}
 .logo{display:flex;align-items:center}
 .logo img{display:block;height:28px;width:auto}
-.logo .mk{display:none;height:28px}
+.logo .mk{display:none}
 .msg{height:56px;overflow:hidden;text-align:center}
 .msgin{transition:transform .7s cubic-bezier(.65,0,.35,1)}
-.ml{height:56px;display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:rgba(255,255,255,.78)}
+.ml{height:56px;display:flex;align-items:center;justify-content:center;white-space:nowrap;overflow:hidden;color:rgba(255,255,255,.78)}
 .ml span{overflow:hidden;text-overflow:ellipsis}
 .ml b{color:#fff;font-weight:600}
 .ml .tk{display:inline-block;margin-right:6px}
@@ -32,20 +33,40 @@ body{display:flex;flex-direction:column;font:15px/1.3 Inter,system-ui,sans-serif
 .ml .sm{display:none}
 .cta{display:inline-flex;align-items:center;height:36px;padding:0 16px;border-radius:10px;background:#ef6a5a;color:#2a0d08;font:700 14px Manrope,sans-serif;text-decoration:none;white-space:nowrap;transition:transform .15s}
 .cta:hover{transform:translateY(-1px)}
-.cta:focus-visible{outline:3px solid #ef6a5a;outline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid #ef6a5a;outline-offset:3px}
+/* stage */
+.stage{flex:1;display:flex;flex-direction:column;padding:22px clamp(16px,3vw,40px) clamp(16px,3vw,32px);transition:padding .9s cubic-bezier(.65,0,.35,1)}
+.intro{display:flex;justify-content:space-between;align-items:baseline;gap:24px;max-height:80px;overflow:hidden;margin-bottom:18px;transition:max-height .9s cubic-bezier(.65,0,.35,1),opacity .4s,margin .9s cubic-bezier(.65,0,.35,1)}
+.intro h1{margin:0;font:800 clamp(22px,2.4vw,30px)/1.15 Manrope,sans-serif;letter-spacing:-.015em}
+.intro p{margin:0;color:#6b6f6c;font-size:14px;white-space:nowrap}
+.frame{flex:1;display:flex;flex-direction:column;background:#fff;border:1px solid #e2e1dc;border-radius:16px;overflow:hidden;box-shadow:0 40px 80px -44px rgba(0,0,0,.4);transition:border-radius .9s cubic-bezier(.65,0,.35,1),box-shadow .9s,border-color .9s}
+.chrome{flex:none;height:40px;display:grid;grid-template-columns:90px minmax(0,1fr) 90px;align-items:center;padding:0 14px;background:#f1f0ec;border-bottom:1px solid #e2e1dc}
+.dots{display:flex;gap:8px}
+.dots button{width:12px;height:12px;padding:0;border-radius:50%;border:0;cursor:pointer;position:relative}
+.dots button::after{content:"";position:absolute;inset:-8px}
+.d1{background:#ff5f57}.d2{background:#febc2e}.d3{background:#28c840}
+.dots button:hover{filter:brightness(.9)}
+.addr{justify-self:center;width:min(380px,100%);height:26px;border-radius:7px;background:#fff;border:1px solid #e2e1dc;display:flex;align-items:center;justify-content:center;font-size:12px;color:#7a7e7b}
+.chrome small{justify-self:end;font-size:12px;color:#7a7e7b}
 iframe{flex:1;display:block;width:100%;border:0;background:#1f3d2b}
+/* maximised */
+body.max .stage{padding:0}
+body.max .intro{max-height:0;opacity:0;margin-bottom:0}
+body.max .frame{border-radius:0;border-color:transparent;box-shadow:none}
 @media(max-width:760px){
  .bar{gap:12px;padding:0 12px;height:52px}.msg,.ml{height:52px}
  .logo .full{display:none}.logo .mk{display:block}
  .ml{font-size:13px}.ml .lg{display:none}.ml .sm{display:inline}
  .cta{height:34px;padding:0 12px;font-size:13px}
+ .intro p{display:none}
+ .chrome{grid-template-columns:70px minmax(0,1fr) 0;height:34px}.chrome small{display:none}
 }
-@media(prefers-reduced-motion:reduce){.msgin{transition:none}.ml .tk{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.msgin,.stage,.intro,.frame{transition:none}.ml .tk{animation:none!important}}
 </style>
 </head>
 <body>
 <header class="bar">
-  <a class="logo" href="https://mycoachpath.com" aria-label="My Coach Path"><img class="full" src="mcp-logo-white.png" alt="My Coach Path"><img class="mk" src="mcp-mark-white.png" alt=""></a>
+  <a class="logo" href="https://mycoachpath.com" aria-label="My Coach Path"><img class="full" src="mcp-logo-white.png" alt="My Coach Path"><img class="mk" src="mcp-mark-white.png" alt="" style="height:28px"></a>
   <div class="msg" role="status"><div class="msgin" id="msgin">
     <div class="ml"><span class="lg"><b>Community Showcase</b> · Built live in a My Coach Path Community Call · Groundwork is a demo brand</span><span class="sm"><b>Showcase</b> · Groundwork is a demo brand</span></div>
     <div class="ml"><span class="lg"><span class="tk">🦃</span><b>Thanksgiving special</b> · 1 free spot: your own Signature Lead Experience, built by MCP</span><span class="sm"><span class="tk">🦃</span><b>Thanksgiving:</b> 1 free build</span></div>
@@ -53,13 +74,34 @@ iframe{flex:1;display:block;width:100%;border:0;background:#1f3d2b}
   </div></div>
   <a class="cta" href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Build yours</a>
 </header>
-<iframe src="demo/" title="Groundwork demo: churn cost assessment"></iframe>
+
+<main class="stage">
+  <div class="intro">
+    <h1>Built live with our community. Try it like a prospect would.</h1>
+    <p>Groundwork is a demo brand</p>
+  </div>
+  <div class="frame">
+    <div class="chrome">
+      <div class="dots"><button class="d1" id="dMin" aria-label="Show as window"></button><button class="d2" id="dMin2" aria-label="Show as window"></button><button class="d3" id="dMax" aria-label="Full screen"></button></div>
+      <div class="addr">yourbrand.com/assessment</div>
+      <small>Example</small>
+    </div>
+    <iframe src="demo/" title="Groundwork demo: churn cost assessment"></iframe>
+  </div>
+</main>
+
 <script>
 {
+const b=document.body;let touched=false;
+const setMax=v=>b.classList.toggle('max',v);
+document.getElementById('dMax').addEventListener('click',()=>{touched=true;setMax(true)});
+['dMin','dMin2'].forEach(id=>document.getElementById(id).addEventListener('click',()=>{touched=true;setMax(false)}));
+if(matchMedia('(max-width:760px)').matches)setMax(true);
+else setTimeout(()=>{if(!touched)setMax(true)},2600);
 const bar=document.querySelector('.msg'),inn=document.getElementById('msgin');let i=0,hover=false;
 bar.addEventListener('mouseenter',()=>{hover=true});bar.addEventListener('mouseleave',()=>{hover=false});
 const END=Date.parse('2026-11-27T22:59:00Z');
-function h(){return bar.clientHeight||56}
+const h=()=>bar.clientHeight||56;
 function rot(){if(!hover){i=(i+1)%3;inn.style.transform=`translateY(${-h()*i}px)`;bar.classList.toggle('promo',i===1)}setTimeout(rot,i===0?6000:4500)}
 if(Date.now()<END)setTimeout(rot,4000);
 }
