@@ -79,13 +79,13 @@ p{margin:0}
 .qnav{display:flex;justify-content:space-between;align-items:center;margin-top:24px;gap:12px;font-size:14px;color:var(--mut)}
 .link{background:none;border:0;color:var(--mut);font:500 15px Inter,sans-serif;cursor:pointer;min-height:44px;padding:0;text-decoration:underline;text-underline-offset:3px}
 /* cost of inaction */
-.big{font:800 clamp(56px,10vw,112px)/1 Manrope,sans-serif;color:var(--acc);margin:18px 0 8px;white-space:nowrap;font-variant-numeric:tabular-nums}
+.big{font:800 clamp(56px,10vw,112px)/1 Manrope,sans-serif;color:#ff7f6e;text-shadow:0 2px 30px rgba(255,127,110,.25);margin:18px 0 8px;white-space:nowrap;font-variant-numeric:tabular-nums}
 .years{display:grid;gap:12px;margin-top:34px;max-width:560px}
 .yr{display:grid;grid-template-columns:4.4em minmax(0,1fr) 6.6em;gap:12px;align-items:center;font-size:15px}
 .yr div{height:12px;border-radius:12px;background:rgba(255,255,255,.12);overflow:hidden}
 .yr div span{display:block;height:100%;background:var(--acc);border-radius:12px;transition:width .8s cubic-bezier(.2,.8,.2,1)}
 .yr em{font-style:normal;text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
-.split{display:flex;flex-wrap:wrap;gap:14px 40px;margin-top:28px;font-size:14px;opacity:.8}
+.split{display:flex;flex-wrap:wrap;gap:14px 40px;margin-top:28px;font-size:14px;opacity:.92}
 .split strong{display:block;font:700 20px Manrope,sans-serif;white-space:nowrap;opacity:1}
 .book{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;border-radius:20px;background:var(--card);padding:clamp(24px,4vw,40px)}
 .book p{margin-top:8px}
@@ -212,7 +212,7 @@ footer{font-size:13px;color:var(--mut);text-align:center;padding:26px 16px;borde
       <div class="kicker">Your cost of inaction</div>
       <h2 id="rtitle"></h2>
       <div class="big" id="total">$0</div>
-      <p style="opacity:.85">per year, if nothing changes</p>
+      <p style="opacity:1;font-weight:500">per year, if nothing changes</p>
       <div class="years" id="years"></div>
       <div class="split" id="split"></div>
     </div>
@@ -367,7 +367,7 @@ function calc(){
   $('years').innerHTML=[1,2,3].map(y=>`<div class="yr"><span>Year ${y}</span><div><span style="width:${total*y/max*100}%"></span></div><em>${usd(total*y)}</em></div>`).join('');
   $('split').innerHTML=[[usd(churn),"employee churn"],[usd(clients),"lost clients"],[Math.round(S.n.ownHours)+" h","of your own time"]].map(s=>`<div><strong>${s[0]}</strong>${s[1]}</div>`).join('');
 }
-document.querySelectorAll('.inputs input').forEach(el=>el.addEventListener('input',calc));
+document.querySelectorAll('.inputs input').forEach(el=>el.addEventListener('input',()=>{if(S.cu)cancelAnimationFrame(S.cu);calc()}));
 
 function typeOf(){
   const dep=(A(5)+A(6))/6,churn=(A(2)+A(7))/6;
@@ -384,6 +384,18 @@ function renderCost(){
   $('rtitle').textContent=zero?'No churn cost in the last 12 months':t;
   $('rsum').textContent=zero?'Nobody left and no clients were lost. That is rare, and it usually rests on groundwork that is worth protecting as the business grows.':s;
   $('bookh').textContent=zero?'Want to keep it that way?':'Does this number surprise you?';
+  countUp($('total'),S.n.total);
+  const bars=[...document.querySelectorAll('#years .yr div span')],ws=bars.map(b=>b.style.width);
+  bars.forEach(b=>{b.style.transition='none';b.style.width='0%'});
+  requestAnimationFrame(()=>requestAnimationFrame(()=>bars.forEach((b,k)=>{b.style.transition='width 1.4s cubic-bezier(.2,.8,.2,1) '+(k*0.15)+'s';b.style.width=ws[k]})));
+}
+function countUp(el,to){
+  if(S.cu)cancelAnimationFrame(S.cu);
+  if(reduce||to<1){el.textContent=usd(to);return}
+  const t0=performance.now(),dur=1600;el.classList.add('counting');
+  const tick=now=>{const k=Math.min(1,(now-t0)/dur),e=1-Math.pow(1-k,4);el.textContent=usd(to*e);
+    if(k<1)S.cu=requestAnimationFrame(tick);else el.classList.remove('counting')};
+  el.textContent=usd(0);S.cu=requestAnimationFrame(tick);
 }
 
 /* bonus org chart: same people, two layouts; nodes glide between them */
