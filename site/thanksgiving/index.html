@@ -139,17 +139,17 @@ form{display:grid;gap:14px;margin-top:20px}
 .bknote{font-size:13px;color:var(--mut);text-align:center}
 .formrow{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center}
 .about{position:fixed;right:20px;bottom:20px;z-index:40;display:flex;flex-direction:column;align-items:flex-end}
-.aboutpill{min-height:40px;padding:0 16px;border-radius:40px;border:0;background:#000;color:#fff;font:600 13px Inter,sans-serif;cursor:pointer;box-shadow:0 8px 24px -10px rgba(0,0,0,.5);transition:opacity .3s,transform .3s}
+.aboutpill{min-height:40px;padding:0 16px;border-radius:40px;border:0;background:#000;color:#fff;font:500 13px Inter,sans-serif;cursor:pointer;box-shadow:0 8px 24px -10px rgba(0,0,0,.5);transition:opacity .3s,transform .3s}
 .about.open .aboutpill,.about:not(.ready) .aboutpill{opacity:0;transform:translateY(8px);pointer-events:none}
-.aboutcard{position:absolute;right:0;bottom:0;width:min(340px,calc(100vw - 32px));background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:22px 22px 20px;box-shadow:0 24px 60px -20px rgba(0,0,0,.45);opacity:0;transform:translateY(24px) scale(.97);transform-origin:bottom right;pointer-events:none;transition:opacity .45s,transform .6s cubic-bezier(.34,1.4,.64,1)}
+.aboutcard{position:absolute;right:0;bottom:0;width:min(330px,calc(100vw - 24px));background:#000;color:#fff;border-radius:16px;padding:20px 24px 22px;box-shadow:0 24px 60px -18px rgba(0,0,0,.55);opacity:0;transform:translateY(20px);pointer-events:none;transition:opacity .5s ease,transform .7s cubic-bezier(.2,.8,.2,1)}
 .about.open .aboutcard{opacity:1;transform:none;pointer-events:auto}
-.aboutk{font:700 12px Manrope,sans-serif;color:var(--acc);margin-bottom:8px}
-.aboutcard h3{font-size:18px;margin-bottom:10px;padding-right:20px}
-.aboutcard p{font-size:14px;color:var(--mut);margin-top:6px}
-.aboutcard p b{color:var(--ink)}
-.aboutcard a{display:inline-block;margin-top:14px;font:700 14px Manrope,sans-serif;color:var(--acc);text-underline-offset:3px}
-.aboutx{position:absolute;top:10px;right:10px;width:34px;height:34px;border:0;background:none;color:var(--mut);font-size:22px;cursor:pointer;border-radius:50%}
-.aboutx:hover{background:var(--card)}
+.aboutl{font:500 12px Inter,sans-serif;color:rgba(255,255,255,.55);margin:0 0 10px}
+.aboutm{font:600 17px/1.4 Manrope,sans-serif;letter-spacing:-.005em;margin:0;padding-right:18px;text-wrap:pretty}
+.abouts{font:400 14px/1.5 Inter,sans-serif;color:rgba(255,255,255,.65);margin:8px 0 0}
+.aboutcard a{display:inline-block;margin-top:16px;font:600 14px Inter,sans-serif;color:#fff;text-decoration:none;border-bottom:1px solid rgba(255,255,255,.4);padding-bottom:2px}
+.aboutcard a:hover{border-color:#fff}
+.aboutx{position:absolute;top:12px;right:12px;width:32px;height:32px;border:0;background:none;color:rgba(255,255,255,.55);font-size:20px;line-height:1;cursor:pointer;border-radius:50%}
+.aboutx:hover{color:#fff;background:rgba(255,255,255,.08)}
 @media(max-width:600px){.about{right:12px;bottom:12px}}
 @media(prefers-reduced-motion:reduce){.aboutcard,.aboutpill{transition:opacity .2s}}
 .note{font-size:13px;color:var(--mut);margin-top:16px}
@@ -313,12 +313,11 @@ footer{font-size:13px;color:var(--mut);text-align:center;padding:26px 16px;borde
 
 <aside class="about" id="about" aria-label="About this page">
   <button class="aboutpill" id="aboutOpen" aria-expanded="false">About this example</button>
-  <div class="aboutcard" id="aboutCard" role="dialog" aria-labelledby="aboutH">
+  <div class="aboutcard" id="aboutCard" role="dialog" aria-label="About this example">
     <button class="aboutx" id="aboutClose" aria-label="Close">×</button>
-    <div class="aboutk">Built live with the community</div>
-    <h3 id="aboutH">This page was created in real time</h3>
-    <p>It came together during a My Coach Path Community Call on November 25, 2026, with coaches giving feedback as it was built, based on one member's framework.</p>
-    <p><b>Groundwork</b> is a fictional brand made for this example.</p>
+    <p class="aboutl">Behind this page</p>
+    <p class="aboutm">Built live with coaches of the My Coach Path Community, November 25, 2026.</p>
+    <p class="abouts">Groundwork is a demo brand.</p>
     <a href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Build yours with MCP</a>
   </div>
 </aside>
