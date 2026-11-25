@@ -10,10 +10,10 @@
 <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 /* VOICE: quiet preview, the example does the talking
-   IDEA: a Mac window on a showcase wall that maximises itself, like pressing the green button
+   IDEA: a template preview: the live demo full screen, introduced by one calm card
    PICTURE: the live Groundwork demo in a browser window that grows to full screen
-   COLOUR and TYPE: black bar, warm off-white wall, Mac window chrome, one coral button; Manrope + Inter
-   LAYOUT: bar, one-line intro, big window; after a beat the window fills everything under the bar */
+   COLOUR and TYPE: black bar, blurred demo behind a white card, one coral button; Manrope + Inter
+   LAYOUT: bar on top, demo fills the rest, intro card over a blur until started */
 *{box-sizing:border-box;min-width:0}
 html,body{margin:0;height:100%;overflow:hidden}
 body{display:flex;flex-direction:column;background:#f4f3ef;color:#111;font:15px/1.4 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
@@ -34,7 +34,7 @@ body{display:flex;flex-direction:column;background:#f4f3ef;color:#111;font:15px/
 .cta:hover{transform:translateY(-1px)}
 a:focus-visible,button:focus-visible{outline:3px solid #ef6a5a;outline-offset:3px}
 /* stage */
-.stage{flex:1;display:flex;flex-direction:column;padding:22px clamp(16px,3vw,40px) clamp(16px,3vw,32px);transition:padding .9s cubic-bezier(.65,0,.35,1)}
+.stage{flex:1;display:flex;flex-direction:column}
 .stage{position:relative}
 .pop{position:absolute;inset:0;z-index:5;display:grid;place-items:center;padding:20px;background:rgba(244,243,239,.35);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);transition:opacity .5s ease,visibility .5s}
 .popcard{width:min(520px,100%);background:#fff;border-radius:20px;padding:clamp(28px,4vw,44px);box-shadow:0 40px 90px -30px rgba(0,0,0,.45);text-align:left;animation:popin .8s cubic-bezier(.2,.8,.2,1) .25s backwards;transition:transform .5s ease,opacity .4s}
@@ -47,29 +47,19 @@ a:focus-visible,button:focus-visible{outline:3px solid #ef6a5a;outline-offset:3p
 .popb:hover{transform:translateY(-1px)}
 body.go .pop{opacity:0;visibility:hidden}
 body.go .popcard{transform:scale(.96);opacity:0}
-.frame{flex:1;display:flex;flex-direction:column;background:#fff;border:1px solid #e2e1dc;border-radius:16px;overflow:hidden;box-shadow:0 40px 80px -44px rgba(0,0,0,.4);transition:border-radius .9s cubic-bezier(.65,0,.35,1),box-shadow .9s,border-color .9s}
-.chrome{flex:none;height:40px;display:grid;grid-template-columns:90px minmax(0,1fr) 90px;align-items:center;padding:0 14px;background:#f1f0ec;border-bottom:1px solid #e2e1dc}
-.dots{display:flex;gap:8px}
-.dots i{width:11px;height:11px;border-radius:50%;background:#d6d5d0}
-.addr{justify-self:center;width:min(380px,100%);height:26px;border-radius:7px;background:#fff;border:1px solid #e2e1dc;display:flex;align-items:center;justify-content:center;font-size:12px;color:#7a7e7b}
-.chrome small{justify-self:end;font-size:12px;color:#7a7e7b}
 iframe{flex:1;display:block;width:100%;border:0;background:#1f3d2b}
-/* maximised */
-body.max .stage{padding:0}
-body.max .frame{border-radius:0;border-color:transparent;box-shadow:none}
 @media(max-width:760px){
  .bar{gap:12px;padding:0 12px;height:52px}.msg,.ml{height:52px}
  .logo img{height:22px}
  .ml{font-size:13px}.ml .lg{display:none}.ml .sm{display:inline}
  .cta{height:34px;padding:0 12px;font-size:13px}
- .chrome{grid-template-columns:70px minmax(0,1fr) 0;height:34px}.chrome small{display:none}
 }
-@media(prefers-reduced-motion:reduce){.msgin,.stage,.frame,.pop,.popcard{transition:none}.popcard{animation:none}.ml .tk{animation:none!important}}
+@media(prefers-reduced-motion:reduce){.msgin,.pop,.popcard{transition:none}.popcard{animation:none}.ml .tk{animation:none!important}}
 </style>
 </head>
 <body>
 <header class="bar">
-  <a class="logo" href="https://mycoachpath.com" aria-label="My Coach Path"><img src="mcp-logo-white.png" alt="My Coach Path"></a>
+  <div class="logo"><img src="mcp-logo-white.png" alt="My Coach Path"></div>
   <div class="msg" role="status"><div class="msgin" id="msgin">
     <div class="ml"><span class="lg"><b>Community Showcase</b> · Built live in a My Coach Path Community Call · Groundwork is a demo brand</span><span class="sm"><b>Showcase</b> · Groundwork is a demo brand</span></div>
     <div class="ml"><span class="lg"><span class="tk">🦃</span><b>Thanksgiving special</b> · 1 free spot: your own Signature Lead Experience, built by MCP</span><span class="sm"><span class="tk">🦃</span><b>Thanksgiving:</b> 1 free build</span></div>
@@ -88,20 +78,13 @@ body.max .frame{border-radius:0;border-color:transparent;box-shadow:none}
       <button class="popb" id="start">Start the experience</button>
     </div>
   </div>
-  <div class="frame">
-    <div class="chrome">
-      <div class="dots" aria-hidden="true"><i></i><i></i><i></i></div>
-      <div class="addr">yourbrand.com/assessment</div>
-      <small>Example</small>
-    </div>
-    <iframe src="demo/" title="Groundwork demo: churn cost assessment"></iframe>
-  </div>
+  <iframe src="demo/" title="Groundwork demo: churn cost assessment"></iframe>
 </main>
 
 <script>
 {
 const b=document.body;
-const start=()=>{if(b.classList.contains('go'))return;b.classList.add('go');setTimeout(()=>b.classList.add('max'),matchMedia('(max-width:760px)').matches?0:650)};
+const start=()=>{if(b.classList.contains('go'))return;b.classList.add('go');};
 document.getElementById('start').addEventListener('click',start);
 document.getElementById('start').focus({preventScroll:true});
 const bar=document.querySelector('.msg'),inn=document.getElementById('msgin');let i=0,hover=false;
