@@ -138,6 +138,20 @@ form{display:grid;gap:14px;margin-top:20px}
 .bk{display:grid;gap:10px;justify-items:center}
 .bknote{font-size:13px;color:var(--mut);text-align:center}
 .formrow{display:flex;flex-wrap:wrap;gap:12px 22px;align-items:center}
+.about{position:fixed;right:20px;bottom:20px;z-index:40;display:flex;flex-direction:column;align-items:flex-end}
+.aboutpill{min-height:40px;padding:0 16px;border-radius:40px;border:0;background:#000;color:#fff;font:600 13px Inter,sans-serif;cursor:pointer;box-shadow:0 8px 24px -10px rgba(0,0,0,.5);transition:opacity .3s,transform .3s}
+.about.open .aboutpill,.about:not(.ready) .aboutpill{opacity:0;transform:translateY(8px);pointer-events:none}
+.aboutcard{position:absolute;right:0;bottom:0;width:min(340px,calc(100vw - 32px));background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:18px;padding:22px 22px 20px;box-shadow:0 24px 60px -20px rgba(0,0,0,.45);opacity:0;transform:translateY(24px) scale(.97);transform-origin:bottom right;pointer-events:none;transition:opacity .45s,transform .6s cubic-bezier(.34,1.4,.64,1)}
+.about.open .aboutcard{opacity:1;transform:none;pointer-events:auto}
+.aboutk{font:700 12px Manrope,sans-serif;color:var(--acc);margin-bottom:8px}
+.aboutcard h3{font-size:18px;margin-bottom:10px;padding-right:20px}
+.aboutcard p{font-size:14px;color:var(--mut);margin-top:6px}
+.aboutcard p b{color:var(--ink)}
+.aboutcard a{display:inline-block;margin-top:14px;font:700 14px Manrope,sans-serif;color:var(--acc);text-underline-offset:3px}
+.aboutx{position:absolute;top:10px;right:10px;width:34px;height:34px;border:0;background:none;color:var(--mut);font-size:22px;cursor:pointer;border-radius:50%}
+.aboutx:hover{background:var(--card)}
+@media(max-width:600px){.about{right:12px;bottom:12px}}
+@media(prefers-reduced-motion:reduce){.aboutcard,.aboutpill{transition:opacity .2s}}
 .note{font-size:13px;color:var(--mut);margin-top:16px}
 footer{font-size:13px;color:var(--mut);text-align:center;padding:26px 16px;border-top:1px solid var(--line)}
 .step{display:none}.step.on{display:block;animation:fade .4s ease}
@@ -297,6 +311,18 @@ footer{font-size:13px;color:var(--mut);text-align:center;padding:26px 16px;borde
   </div>
 </section>
 
+<aside class="about" id="about" aria-label="About this page">
+  <button class="aboutpill" id="aboutOpen" aria-expanded="false">About this example</button>
+  <div class="aboutcard" id="aboutCard" role="dialog" aria-labelledby="aboutH">
+    <button class="aboutx" id="aboutClose" aria-label="Close">×</button>
+    <div class="aboutk">Built live with the community</div>
+    <h3 id="aboutH">This page was created in real time</h3>
+    <p>It came together during a My Coach Path Community Call on November 25, 2026, with coaches giving feedback as it was built, based on one member's framework.</p>
+    <p><b>Groundwork</b> is a fictional brand made for this example.</p>
+    <a href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Build yours with MCP</a>
+  </div>
+</aside>
+
 <footer>© 2026 My Coach Path · MCP Community</footer>
 
 <script>
@@ -453,7 +479,7 @@ function go(n,fromHash){
   S.step=n;clearTimeout(S.timer);
   document.querySelectorAll('.step').forEach((s,i)=>s.classList.toggle('on',i+1===n));
   document.querySelectorAll('.testbar [data-go]').forEach(b=>b.setAttribute('aria-current',String(+b.dataset.go===n)));
-  if(n===2)renderQ();
+  if(n===2){renderQ();if(typeof abOpen==='function')abOpen(false)}
   if(n===3)renderCost();
   if(n===4)renderBonus();
   window.scrollTo(0,0);
@@ -488,6 +514,11 @@ ex.addEventListener('mouseenter',()=>{exHover=true});ex.addEventListener('mousel
 function rot(){if(!exHover){exI=(exI+1)%3;exin.style.transform=`translateY(${-50*exI}px)`;ex.classList.toggle('promo',exI===1)}setTimeout(rot,exI===0?5000:4500)}
 const TG_END=Date.parse('2026-11-27T22:59:00Z');
 if(Date.now()>TG_END){$('tgline').textContent='The Thanksgiving free build offer has ended.';$('tgnote').remove()}else setTimeout(rot,3000);
+const ab=$('about');
+function abOpen(v){ab.classList.toggle('open',v);$('aboutOpen').setAttribute('aria-expanded',String(v))}
+$('aboutOpen').addEventListener('click',()=>abOpen(true));
+$('aboutClose').addEventListener('click',()=>abOpen(false));
+setTimeout(()=>{ab.classList.add('ready');if(S.step!==2)abOpen(true)},3500);
 S.preview=location.hash==='#preview';
 if(S.preview)document.querySelector('.testbar').classList.add('show');
 window.addEventListener('hashchange',()=>{if(S.preview)return;const m=/^#step-([2-4])$/.exec(location.hash);const n=m?+m[1]:1;if(n!==S.step)go(n,true)});
