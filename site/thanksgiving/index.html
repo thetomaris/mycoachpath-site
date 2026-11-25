@@ -37,7 +37,8 @@ p{margin:0}
 .exl .tk{display:inline-block}
 .exbar.promo .tk{animation:wob 1s ease .6s 2}
 @keyframes wob{0%,100%{transform:rotate(0)}25%{transform:rotate(-14deg)}75%{transform:rotate(14deg)}}
-@media(max-width:520px){.exl{gap:10px;font-size:12px}}
+.exl .sm{display:none}
+@media(max-width:600px){.exl{gap:12px;font-size:13px}.exl .lg{display:none}.exl .sm{display:inline}}
 .exbar b{font-weight:600;color:#fff}
 .exbar a{color:#ffb3a8;text-underline-offset:3px}
 .offer{margin-top:clamp(64px,9vw,120px);padding:clamp(32px,5vw,64px);border-radius:24px;background:#0f2118;color:#eef4f0;scroll-margin-top:24px}
@@ -150,9 +151,9 @@ footer{font-size:13px;color:var(--mut);text-align:center;padding:26px 16px;borde
 
 <div class="exbar" id="exbar" role="status">
   <div class="exin">
-    <div class="exl"><span><b>Live example</b> · Built together in a My Coach Path Community Call</span><a href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Build yours with MCP</a></div>
-    <div class="exl"><span><span class="tk">🦃</span> <b>Thanksgiving special</b> · 1 free spot: your own Signature Lead Experience, built by MCP</span><a href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Claim it</a></div>
-    <div class="exl"><span>For the first booking by Nov 27 · Your context, MCP's build</span><a href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Claim it</a></div>
+    <div class="exl"><span class="lg"><b>Live example</b> · Built together in a My Coach Path Community Call</span><span class="sm"><b>Live example</b> · MCP Community</span><a href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Build yours with MCP</a></div>
+    <div class="exl"><span class="lg"><span class="tk">🦃</span> <b>Thanksgiving special</b> · 1 free spot: your own Signature Lead Experience, built by MCP</span><span class="sm"><span class="tk">🦃</span> <b>Thanksgiving:</b> 1 free build</span><a href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Claim it</a></div>
+    <div class="exl"><span class="lg">For the first booking by Nov 27 · Your context, MCP's build</span><span class="sm">First booking by Nov 27</span><a href="https://calendly.com/honest-marketing/thanksgiving-giveaway" target="_blank" rel="noopener">Claim it</a></div>
   </div>
 </div>
 
